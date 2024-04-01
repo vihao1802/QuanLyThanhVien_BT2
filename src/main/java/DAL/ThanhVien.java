@@ -14,27 +14,28 @@ import javax.persistence.*;
  */
 @Data
 @Entity
-@Table
+@Table(name =  "thanhvien") // should equal to table name in db
 public class ThanhVien {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int MaTV;
     
-    @Column
+    @Column(nullable = false, length = 100)
     private String HoTen;
     
-    @Column
+    @Column(length = 100)
     private String Khoa;
     
-    @Column
+    @Column(length = 100)
     private String Nganh;
     
-    @Column
+    @Column(length = 15)
     private String SDT;
     
-    @OneToMany(mappedBy = "thanhvien")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "thanhvien")
     private List<ThongTinSD> listThongTinSD;
     
-    @OneToMany(mappedBy = "thanhvien")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "thanhvien")
     private List<XuLy> listXuLy;
 
 }
