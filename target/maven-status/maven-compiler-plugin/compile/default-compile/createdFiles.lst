@@ -1,1 +1,10 @@
+DAL\XuLy.class
+DAL\ThongTinSDDAL.class
 com\mycompany\qlthanhvien_bt2\QLThanhVien_BT2.class
+DAL\ThongTinSD.class
+DAL\ThanhVien.class
+DAL\ThanhVienDAL.class
+DAL\ThietBi.class
+DAL\ThietBiDAL.class
+DAL\XuLyDAL.class
+DAL\HibernateUtil.class

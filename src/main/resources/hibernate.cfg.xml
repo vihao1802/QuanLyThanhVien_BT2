@@ -19,7 +19,9 @@
         <!-- Show all executed SQL to console -->
         <property name="show_sql">true</property>
         <!-- Entity mapping -->
-<!--        <mapping class="com.mycompany.exercise_hibernate.Course" /> 
-        <mapping resource = "Department.hbm.xml"/>-->
+        <mapping class="DAL.ThanhVien" />
+        <mapping class="DAL.ThongTinSD" />
+        <mapping class="DAL.ThietBi" />
+        <mapping class="DAL.XuLy" />
     </session-factory>
 </hibernate-configuration>

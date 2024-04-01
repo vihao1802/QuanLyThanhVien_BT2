@@ -13,18 +13,19 @@ import javax.persistence.*;
  */
 @Data
 @Entity
-@Table
+@Table(name = "thietbi") // should equal to table name in db
 public class ThietBi {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int MaTB;
     
-    @Column
+    @Column(nullable = false, length = 100)
     private String TenTB;
     
     @Column
     private String MoTaTB;
     
-    @OneToMany(mappedBy = "thietbi" )
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "thietbi" )
     private List<ThongTinSD> listThongTinSD;
     
 }
