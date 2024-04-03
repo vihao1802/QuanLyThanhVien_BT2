@@ -38,6 +38,17 @@ public class XuLyDAL {
         session.getTransaction().commit();
         return list;
     }
+    
+    public XuLy getXuLyThanhVienDangViPham(int MaTV) {
+        session.beginTransaction();
+        Query q = session.createQuery("FROM XuLy WHERE MaTV = :MaTV AND TrangThaiXL = :TrangThaiXL");
+        q.setParameter("MaTV", MaTV);
+        q.setParameter("TrangThaiXL", 0);
+        XuLy xl = (XuLy) q.uniqueResult();
+        session.getTransaction().commit();
+        return xl;
+    }
+    
     public void add(XuLy obj)
     {
         session.save(obj);
