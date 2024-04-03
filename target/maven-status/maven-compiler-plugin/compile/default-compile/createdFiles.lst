@@ -4,9 +4,12 @@ com\mycompany\qlthanhvien_bt2\QLThanhVien_BT2.class
 DAL\ThongTinSD.class
 DAL\ThanhVien.class
 DAL\ThanhVienDAL.class
+GUI\MainForm$2.class
 DAL\ThietBiDAL.class
 DAL\XuLyDAL.class
 DAL\XuLy.class
+BLL\ThanhVienBLL.class
 GUI\MainForm.class
 DAL\ThietBi.class
+.netbeans_automatic_build
 DAL\HibernateUtil.class
