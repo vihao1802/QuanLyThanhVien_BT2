@@ -7,6 +7,7 @@ package GUI;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.util.List;
 import BLL.ThanhVienBLL;
+import BLL.ThietBiBLL;
 import DAL.ThanhVien;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +22,7 @@ public class MainForm extends javax.swing.JFrame {
      * Creates new form MainForm
      */
     ThanhVienBLL thanhvienBLL;
+    ThietBiBLL thietbiBLL;
     public MainForm() {
         initComponents();
         thanhvienBLL = new ThanhVienBLL();

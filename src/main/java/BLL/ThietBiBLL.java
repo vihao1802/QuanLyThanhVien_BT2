@@ -18,7 +18,7 @@ public class ThietBiBLL {
         ThietBiDAL = new ThietBiDAL();
     }
 
-    public List loadThanhVien() {
+    public List loadThietBi() {
         List list;
         list = ThietBiDAL.loadThietBi();
         return list;
