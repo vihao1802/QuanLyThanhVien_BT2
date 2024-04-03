@@ -24,4 +24,12 @@ public class ThanhVienBLL {
         list = thanhvienDAL.loadThanhVien();
         return list;
     }
+    
+    public ThanhVien getThanhVien(int MaTV) {
+        return thanhvienDAL.getThanhVien(MaTV);
+    }
+    
+    public void delete(ThanhVien tv) {
+        thanhvienDAL.delete(tv);
+    }
 }
