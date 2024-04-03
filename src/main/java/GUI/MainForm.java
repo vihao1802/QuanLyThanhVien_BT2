@@ -9,6 +9,13 @@ import java.util.List;
 import BLL.ThanhVienBLL;
 import BLL.ThietBiBLL;
 import DAL.ThanhVien;
+import DAL.ThanhVienDAL;
+import DAL.XuLy;
+import DAL.XuLyDAL;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
@@ -77,7 +84,10 @@ public class MainForm extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane7 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton9 = new javax.swing.JButton();
+        jPanel_formVaoKhuHocTap = new javax.swing.JPanel();
+        jLabe_DienMaTV = new javax.swing.JLabel();
+        jBtn_enterClassZone = new javax.swing.JButton();
+        jtf_maThanhVien = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel11 = new javax.swing.JPanel();
@@ -127,27 +137,73 @@ public class MainForm extends javax.swing.JFrame {
         jTabbedPane7.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         jTabbedPane7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
-        jButton9.setBackground(new java.awt.Color(0, 255, 51));
-        jButton9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Duyệt");
-        jButton9.setToolTipText("");
+        jPanel_formVaoKhuHocTap.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabe_DienMaTV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabe_DienMaTV.setForeground(new java.awt.Color(0, 0, 0));
+        jLabe_DienMaTV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabe_DienMaTV.setText("Điền mã thành viên để vào khu học tập");
+
+        jBtn_enterClassZone.setBackground(new java.awt.Color(51, 51, 255));
+        jBtn_enterClassZone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jBtn_enterClassZone.setForeground(new java.awt.Color(255, 255, 255));
+        jBtn_enterClassZone.setText("Enter");
+        jBtn_enterClassZone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtn_enterClassZoneActionPerformed(evt);
+            }
+        });
+
+        jtf_maThanhVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jtf_maThanhVien.setText("Vui lòng nhập mã thành viên");
+        jtf_maThanhVien.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_maThanhVienFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_maThanhVienFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_formVaoKhuHocTapLayout = new javax.swing.GroupLayout(jPanel_formVaoKhuHocTap);
+        jPanel_formVaoKhuHocTap.setLayout(jPanel_formVaoKhuHocTapLayout);
+        jPanel_formVaoKhuHocTapLayout.setHorizontalGroup(
+            jPanel_formVaoKhuHocTapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_formVaoKhuHocTapLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel_formVaoKhuHocTapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabe_DienMaTV, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                    .addComponent(jBtn_enterClassZone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtf_maThanhVien))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        jPanel_formVaoKhuHocTapLayout.setVerticalGroup(
+            jPanel_formVaoKhuHocTapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_formVaoKhuHocTapLayout.createSequentialGroup()
+                .addContainerGap(146, Short.MAX_VALUE)
+                .addComponent(jLabe_DienMaTV)
+                .addGap(33, 33, 33)
+                .addComponent(jtf_maThanhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jBtn_enterClassZone, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(708, Short.MAX_VALUE)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(204, Short.MAX_VALUE)
+                .addComponent(jPanel_formVaoKhuHocTap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(202, 202, 202))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(647, Short.MAX_VALUE)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addContainerGap(107, Short.MAX_VALUE)
+                .addComponent(jPanel_formVaoKhuHocTap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(139, 139, 139))
         );
 
         jTabbedPane7.addTab("Thông tin thành viên", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-info-30.png")), jPanel1); // NOI18N
@@ -332,16 +388,16 @@ public class MainForm extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE))
+                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,7 +555,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jtf_searchCourse2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton5, jButton6});
@@ -514,7 +570,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 707, Short.MAX_VALUE)
         );
 
         jTabbedPane7.addTab("Quản lý thiết bị", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-device-manager-30.png")), jPanel3, "Quản lý thiết bị"); // NOI18N
@@ -527,7 +583,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 707, Short.MAX_VALUE)
         );
 
         jTabbedPane7.addTab("Xử lý vi phạm", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-warning-30.png")), jPanel4, "Xử lý vi phạm"); // NOI18N
@@ -540,7 +596,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 707, Short.MAX_VALUE)
         );
 
         jTabbedPane7.addTab("Thống kê", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-statistic-30.png")), jPanel5, "Thống kê"); // NOI18N
@@ -558,6 +614,63 @@ public class MainForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtf_maThanhVienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_maThanhVienFocusGained
+        // TODO add your handling code here:
+        if (jtf_maThanhVien.getText().equals("Vui lòng nhập mã thành viên")) {
+            jtf_maThanhVien.setText(null);
+            jtf_maThanhVien.requestFocus();
+            System.out.println("");
+        }
+    }//GEN-LAST:event_jtf_maThanhVienFocusGained
+
+    private void jtf_maThanhVienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_maThanhVienFocusLost
+        // TODO add your handling code here:
+        if (jtf_maThanhVien.getText().length() == 0) {
+            addPlaceHolderStyle(jtf_maThanhVien);
+            jtf_maThanhVien.setText("Vui lòng nhập mã thành viên");
+        }
+    }//GEN-LAST:event_jtf_maThanhVienFocusLost
+
+    private void jBtn_enterClassZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtn_enterClassZoneActionPerformed
+        // TODO add your handling code here:
+        // check blank
+        if (jtf_maThanhVien.getText().length() == 0 || jtf_maThanhVien.getText().equals("Vui lòng nhập mã thành viên")) {
+            JOptionPane.showMessageDialog(null, "Mã thành viên không để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return;
+        } 
+        
+        // check is number
+        int matv = -1;
+;
+        try {
+            matv = Integer.parseInt(jtf_maThanhVien.getText().trim());
+        } catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Nhập mã không hợp lệ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // check exist
+        ThanhVienDAL tvDAL = new ThanhVienDAL();
+        ThanhVien isThanhVIen = tvDAL.getThanhVien(matv);
+        if(isThanhVIen == null) {
+            JOptionPane.showMessageDialog(null, "Mã thành viên không tồn tại", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // check violation
+        XuLyDAL xlDAL = new XuLyDAL();
+        XuLy isXuLy = xlDAL.getXuLyThanhVienDangViPham(matv);
+        if(isXuLy != null) {
+            JOptionPane.showMessageDialog(null,"Tài khoản hiện đang bị xử lý vi phạm \n"+  "Hình thức: " +isXuLy.getHinhThucXL()+ "\n" + "Từ ngày: " + isXuLy.getNgayXL() , "Vi Phạm", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        jtf_maThanhVien.setText("Vui lòng nhập mã thành viên");
+        ThanhVienInformationForm tvForm = new ThanhVienInformationForm();
+        tvForm.setup(isThanhVIen.getMaTV(), isThanhVIen.getHoTen(), isThanhVIen.getKhoa(), isThanhVIen.getNganh(), isThanhVIen.getSDT());
+        tvForm.setVisible(true);
+    }//GEN-LAST:event_jBtn_enterClassZoneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -588,9 +701,22 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
     }
+    public void addPlaceHolderStyle(JTextField jtf) {
+        Font f = jtf.getFont();
+        f = f.deriveFont(Font.ITALIC);
+        jtf.setFont(f);
+        jtf.setForeground(Color.gray);
+    }
 
+    public void removePlaceHolderStyle(JTextField jtf) {
+        Font f = jtf.getFont();
+        f = f.deriveFont(Font.PLAIN | Font.BOLD);
+        jtf.setFont(f);
+        jtf.setForeground(Color.black);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jBtn_enterClassZone;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -598,8 +724,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private com.toedter.calendar.JDateChooser jDateNgayMT;
+    private javax.swing.JLabel jLabe_DienMaTV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
@@ -613,6 +739,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel_formVaoKhuHocTap;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -626,6 +753,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTable jTable11;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jtf_maThanhVien;
     private javax.swing.JTextField jtf_searchCourse2;
     private javax.swing.JTable tbDangKyMuonTra;
     private javax.swing.JTable tbThanhVienMuonTra;
