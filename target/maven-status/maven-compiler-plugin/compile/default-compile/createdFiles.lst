@@ -9,6 +9,7 @@ BLL\ThanhVienBLL.class
 GUI\MainForm$5.class
 GUI\MainForm.class
 DAL\ThietBi.class
+GUI\MainForm$8.class
 DAL\HibernateUtil.class
 GUI\MainForm$1.class
 GUI\ThanhVienInformationForm.class
@@ -18,4 +19,5 @@ DAL\ThanhVien.class
 DAL\XuLyDAL.class
 GUI\MainForm$6.class
 GUI\MainForm$4.class
+GUI\MainForm$9.class
 GUI\ThanhVienInformationForm$2.class

@@ -29,10 +29,13 @@ public class MainForm extends javax.swing.JFrame {
      */
     ThanhVienBLL thanhvienBLL;
     ThietBiBLL thietbiBLL;
+    XuLyBLL xlBLL;
+
     public MainForm() {
         initComponents();
         thanhvienBLL = new ThanhVienBLL();
-        loadDataThanhVienToTableThanhVienMuonTra();
+        xlBLL = new XuLyBLL();
+        
     }
     
     public void loadDataThanhVienToTableThanhVienMuonTra() {
@@ -81,7 +84,7 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jTabbedPane7 = new javax.swing.JTabbedPane();
+        jTabbedPane_QLTV = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel_formVaoKhuHocTap = new javax.swing.JPanel();
         jLabe_DienMaTV = new javax.swing.JLabel();
@@ -120,7 +123,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jBtn_xoaThanhVien = new javax.swing.JButton();
         jtf_searchInQLTV = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbl_qlThanhVien = new javax.swing.JTable();
@@ -132,9 +135,14 @@ public class MainForm extends javax.swing.JFrame {
         setTitle("Phần mềm quản lý thành viên");
         setLocation(new java.awt.Point(250, 50));
 
-        jTabbedPane7.setBackground(new java.awt.Color(255, 255, 255));
-        jTabbedPane7.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTabbedPane_QLTV.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane_QLTV.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        jTabbedPane_QLTV.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTabbedPane_QLTV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane_QLTVMouseClicked(evt);
+            }
+        });
 
         jPanel_formVaoKhuHocTap.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -205,7 +213,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(139, 139, 139))
         );
 
-        jTabbedPane7.addTab("Thông tin thành viên", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-info-30.png")), jPanel1); // NOI18N
+        jTabbedPane_QLTV.addTab("Thông tin thành viên", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-info-30.png")), jPanel1); // NOI18N
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -477,7 +485,7 @@ public class MainForm extends javax.swing.JFrame {
             .addComponent(jTabbedPane1)
         );
 
-        jTabbedPane7.addTab("Quản lý mượn trả", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-borrow-book-30.png")), jPanel6, "Quản lý mượn trả"); // NOI18N
+        jTabbedPane_QLTV.addTab("Quản lý mượn trả", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-borrow-book-30.png")), jPanel6, "Quản lý mượn trả"); // NOI18N
 
         jButton4.setBackground(new java.awt.Color(0, 255, 51));
         jButton4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -491,11 +499,16 @@ public class MainForm extends javax.swing.JFrame {
         jButton5.setText("Sửa");
         jButton5.setToolTipText("");
 
-        jButton6.setBackground(new java.awt.Color(255, 51, 51));
-        jButton6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Xóa");
-        jButton6.setToolTipText("");
+        jBtn_xoaThanhVien.setBackground(new java.awt.Color(255, 51, 51));
+        jBtn_xoaThanhVien.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jBtn_xoaThanhVien.setForeground(new java.awt.Color(255, 255, 255));
+        jBtn_xoaThanhVien.setText("Xóa");
+        jBtn_xoaThanhVien.setToolTipText("");
+        jBtn_xoaThanhVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtn_xoaThanhVienActionPerformed(evt);
+            }
+        });
 
         jtf_searchInQLTV.setText("Search by ID/name");
         jtf_searchInQLTV.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -550,11 +563,11 @@ public class MainForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
+                        .addComponent(jBtn_xoaThanhVien)
                         .addGap(0, 6, Short.MAX_VALUE))))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton5, jButton6});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jBtn_xoaThanhVien, jButton5});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -563,16 +576,16 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6)
+                    .addComponent(jBtn_xoaThanhVien)
                     .addComponent(jtf_searchInQLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton5, jButton6});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBtn_xoaThanhVien, jButton5});
 
-        jTabbedPane7.addTab("Quản lý thành viên", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-member-30.png")), jPanel2, "Quản lý thành viên"); // NOI18N
+        jTabbedPane_QLTV.addTab("Quản lý thành viên", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-member-30.png")), jPanel2, "Quản lý thành viên"); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -585,7 +598,7 @@ public class MainForm extends javax.swing.JFrame {
             .addGap(0, 707, Short.MAX_VALUE)
         );
 
-        jTabbedPane7.addTab("Quản lý thiết bị", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-device-manager-30.png")), jPanel3, "Quản lý thiết bị"); // NOI18N
+        jTabbedPane_QLTV.addTab("Quản lý thiết bị", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-device-manager-30.png")), jPanel3, "Quản lý thiết bị"); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -598,7 +611,7 @@ public class MainForm extends javax.swing.JFrame {
             .addGap(0, 707, Short.MAX_VALUE)
         );
 
-        jTabbedPane7.addTab("Xử lý vi phạm", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-warning-30.png")), jPanel4, "Xử lý vi phạm"); // NOI18N
+        jTabbedPane_QLTV.addTab("Xử lý vi phạm", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-warning-30.png")), jPanel4, "Xử lý vi phạm"); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -611,17 +624,17 @@ public class MainForm extends javax.swing.JFrame {
             .addGap(0, 707, Short.MAX_VALUE)
         );
 
-        jTabbedPane7.addTab("Thống kê", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-statistic-30.png")), jPanel5, "Thống kê"); // NOI18N
+        jTabbedPane_QLTV.addTab("Thống kê", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-statistic-30.png")), jPanel5, "Thống kê"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane_QLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane_QLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -663,15 +676,13 @@ public class MainForm extends javax.swing.JFrame {
         }
         
         // check exist
-        ThanhVienBLL tvBLL = new ThanhVienBLL();
-        ThanhVien isThanhVIen = tvBLL.getThanhVien(matv);
+        ThanhVien isThanhVIen = thanhvienBLL.getThanhVien(matv);
         if(isThanhVIen == null) {
             JOptionPane.showMessageDialog(null, "Mã thành viên không tồn tại", "Thông báo", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         // check violation
-        XuLyBLL xlBLL = new XuLyBLL();
         XuLy isXuLy = xlBLL.getXuLyThanhVienDangViPham(matv);
         if(isXuLy != null) {
             JOptionPane.showMessageDialog(null,"Tài khoản hiện đang bị xử lý vi phạm \n"+  "Hình thức: " +isXuLy.getHinhThucXL()+ "\n" + "Từ ngày: " + isXuLy.getNgayXL() , "Vi Phạm", JOptionPane.WARNING_MESSAGE);
@@ -734,6 +745,47 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtf_searchInQLTVActionPerformed
 
+    private void jBtn_xoaThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtn_xoaThanhVienActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultTableModel model = (DefaultTableModel) jTbl_qlThanhVien.getModel();
+        int selectedRow = jTbl_qlThanhVien.getSelectedRow();
+
+        // Check if a valid cell is clicked
+        if (selectedRow != -1) {
+            jTbl_qlThanhVien.setRowSelectionInterval(selectedRow, selectedRow);
+            Object matv = model.getValueAt(selectedRow, 0);
+            Object hoten = model.getValueAt(selectedRow, 1);
+            Object khoa = model.getValueAt(selectedRow, 2);
+            Object nganh = model.getValueAt(selectedRow, 3);
+            Object sdt = model.getValueAt(selectedRow, 4);
+
+            int res = JOptionPane.showConfirmDialog(null, "Bạn có muốn tiếp tục?", "Xóa thành viên",
+                    JOptionPane.YES_NO_CANCEL_OPTION);
+            if (res != 0) {
+                return;
+            }
+
+            ThanhVien tv = new ThanhVien();
+            tv.setMaTV((int) matv);
+            tv.setHoTen((String) hoten);
+            tv.setKhoa((String) khoa);
+            tv.setNganh((String)nganh);
+            tv.setSDT((String)sdt);
+
+            thanhvienBLL.delete(tv);
+
+            loadDataThanhVienToTableThanhVienMuonTra();
+        } else {
+            JOptionPane.showMessageDialog(null, "Hãy chọn thành viên muốn xóa");
+        }
+    }//GEN-LAST:event_jBtn_xoaThanhVienActionPerformed
+
+    private void jTabbedPane_QLTVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane_QLTVMouseClicked
+        // TODO add your handling code here:
+        loadDataThanhVienToTableThanhVienMuonTra();
+    }//GEN-LAST:event_jTabbedPane_QLTVMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -779,11 +831,11 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBtn_enterClassZone;
+    private javax.swing.JButton jBtn_xoaThanhVien;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private com.toedter.calendar.JDateChooser jDateNgayMT;
@@ -810,7 +862,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane7;
+    private javax.swing.JTabbedPane jTabbedPane_QLTV;
     private javax.swing.JTable jTable11;
     private javax.swing.JTable jTbl_qlThanhVien;
     private javax.swing.JTextField jTextField2;
