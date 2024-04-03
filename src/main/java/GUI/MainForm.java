@@ -8,10 +8,9 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.util.List;
 import BLL.ThanhVienBLL;
 import BLL.ThietBiBLL;
+import BLL.XuLyBLL;
 import DAL.ThanhVien;
-import DAL.ThanhVienDAL;
 import DAL.XuLy;
-import DAL.XuLyDAL;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -51,7 +50,7 @@ public class MainForm extends javax.swing.JFrame {
              row[4] = tv.getSDT();
              model.addRow(row);
         }
-        this.tbThanhVienMuonTra.setModel(model);
+        this.jTbl_qlThanhVien.setModel(model);
     }
     
     public void loadDataThietBiToTableThietBiMuonTra() {
@@ -122,9 +121,9 @@ public class MainForm extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jtf_searchCourse2 = new javax.swing.JTextField();
+        jtf_searchInQLTV = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTbl_qlThanhVien = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -498,9 +497,22 @@ public class MainForm extends javax.swing.JFrame {
         jButton6.setText("Xóa");
         jButton6.setToolTipText("");
 
-        jtf_searchCourse2.setText("Search by ID/name");
+        jtf_searchInQLTV.setText("Search by ID/name");
+        jtf_searchInQLTV.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_searchInQLTVFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_searchInQLTVFocusLost(evt);
+            }
+        });
+        jtf_searchInQLTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_searchInQLTVActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTbl_qlThanhVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -519,7 +531,7 @@ public class MainForm extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTbl_qlThanhVien);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -532,7 +544,7 @@ public class MainForm extends javax.swing.JFrame {
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jtf_searchCourse2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtf_searchInQLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -552,7 +564,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6)
-                    .addComponent(jtf_searchCourse2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_searchInQLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -651,16 +663,16 @@ public class MainForm extends javax.swing.JFrame {
         }
         
         // check exist
-        ThanhVienDAL tvDAL = new ThanhVienDAL();
-        ThanhVien isThanhVIen = tvDAL.getThanhVien(matv);
+        ThanhVienBLL tvBLL = new ThanhVienBLL();
+        ThanhVien isThanhVIen = tvBLL.getThanhVien(matv);
         if(isThanhVIen == null) {
             JOptionPane.showMessageDialog(null, "Mã thành viên không tồn tại", "Thông báo", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         // check violation
-        XuLyDAL xlDAL = new XuLyDAL();
-        XuLy isXuLy = xlDAL.getXuLyThanhVienDangViPham(matv);
+        XuLyBLL xlBLL = new XuLyBLL();
+        XuLy isXuLy = xlBLL.getXuLyThanhVienDangViPham(matv);
         if(isXuLy != null) {
             JOptionPane.showMessageDialog(null,"Tài khoản hiện đang bị xử lý vi phạm \n"+  "Hình thức: " +isXuLy.getHinhThucXL()+ "\n" + "Từ ngày: " + isXuLy.getNgayXL() , "Vi Phạm", JOptionPane.WARNING_MESSAGE);
             return;
@@ -671,6 +683,56 @@ public class MainForm extends javax.swing.JFrame {
         tvForm.setup(isThanhVIen.getMaTV(), isThanhVIen.getHoTen(), isThanhVIen.getKhoa(), isThanhVIen.getNganh(), isThanhVIen.getSDT());
         tvForm.setVisible(true);
     }//GEN-LAST:event_jBtn_enterClassZoneActionPerformed
+
+    private void jtf_searchInQLTVFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_searchInQLTVFocusGained
+        // TODO add your handling code here:
+        if (jtf_searchInQLTV.getText().equals("Search by ID/name")) {
+            jtf_searchInQLTV.setText(null);
+            jtf_searchInQLTV.requestFocus();
+            System.out.println("");
+        }
+    }//GEN-LAST:event_jtf_searchInQLTVFocusGained
+
+    private void jtf_searchInQLTVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_searchInQLTVFocusLost
+        // TODO add your handling code here:
+        if (jtf_searchInQLTV.getText().length() == 0) {
+            addPlaceHolderStyle(jtf_searchInQLTV);
+            jtf_searchInQLTV.setText("Search by ID/name");
+        }
+    }//GEN-LAST:event_jtf_searchInQLTVFocusLost
+
+    private void jtf_searchInQLTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_searchInQLTVActionPerformed
+        // TODO add your handling code here:
+        String input = jtf_searchInQLTV.getText().toLowerCase().trim();
+        DefaultTableModel model = (DefaultTableModel) jTbl_qlThanhVien.getModel();
+        model.setRowCount(0);
+        // You can replace this with actual data loading logic from a database or
+        // another source
+//        ArrayList<CourseInstructorDTO> listCourse = cour_instrucBUS.getList();
+        List<ThanhVien> list = this.thanhvienBLL.loadThanhVien();
+        Object[] row;
+        for(ThanhVien tv : list) {
+            String matv = tv.getMaTV() + "";
+            String hoten = tv.getHoTen();
+            String khoa = tv.getKhoa();
+            String nganh = tv.getNganh();
+            String sdt = tv.getSDT();
+            if(matv.toLowerCase().contains(input)
+                    || hoten.toLowerCase().contains(input)
+                    || khoa.toLowerCase().contains(input)
+                    || nganh.toLowerCase().contains(input)
+                    || sdt.contains(input)) {
+                row = new Object[5];
+                row[0] = tv.getMaTV();
+                row[1] = tv.getHoTen();
+                row[2] = tv.getKhoa();
+                row[3] = tv.getNganh();
+                row[4] = tv.getSDT();
+                model.addRow(row);
+            }
+
+        }
+    }//GEN-LAST:event_jtf_searchInQLTVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -749,12 +811,12 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane7;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable11;
+    private javax.swing.JTable jTbl_qlThanhVien;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jtf_maThanhVien;
-    private javax.swing.JTextField jtf_searchCourse2;
+    private javax.swing.JTextField jtf_searchInQLTV;
     private javax.swing.JTable tbDangKyMuonTra;
     private javax.swing.JTable tbThanhVienMuonTra;
     private javax.swing.JTable tbThietBiMuonTra;

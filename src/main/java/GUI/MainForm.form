@@ -696,7 +696,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jtf_searchCourse2" min="-2" pref="300" max="-2" attributes="0"/>
+                              <Component id="jtf_searchInQLTV" min="-2" pref="300" max="-2" attributes="0"/>
                               <EmptySpace pref="247" max="32767" attributes="0"/>
                               <Component id="jButton4" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -717,7 +717,7 @@
                           <Component id="jButton4" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jButton5" linkSize="2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jButton6" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtf_searchCourse2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="jtf_searchInQLTV" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="600" max="-2" attributes="0"/>
@@ -772,10 +772,15 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jtf_searchCourse2">
+            <Component class="javax.swing.JTextField" name="jtf_searchInQLTV">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search by ID/name"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtf_searchInQLTVFocusGained"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtf_searchInQLTVFocusLost"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf_searchInQLTVActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <AuxValues>
@@ -784,7 +789,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="jTbl_qlThanhVien">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="5" rowCount="4">

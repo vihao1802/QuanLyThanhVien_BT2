@@ -24,4 +24,8 @@ public class ThanhVienBLL {
         list = thanhvienDAL.loadThanhVien();
         return list;
     }
+    
+     public ThanhVien getThanhVien(int MaTV) {
+        return thanhvienDAL.getThanhVien(MaTV);
+    }
 }

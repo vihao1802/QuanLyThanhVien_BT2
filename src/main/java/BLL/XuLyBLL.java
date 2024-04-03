@@ -4,6 +4,7 @@
  */
 package BLL;
 
+import DAL.XuLy;
 import DAL.XuLyDAL;
 import java.util.List;
 
@@ -17,4 +18,8 @@ public class XuLyBLL {
     public XuLyBLL() {
         XuLyDAL = new XuLyDAL();
     }
+    
+     public XuLy getXuLyThanhVienDangViPham(int MaTV) {
+         return XuLyDAL.getXuLyThanhVienDangViPham(MaTV);
+     }
 }
