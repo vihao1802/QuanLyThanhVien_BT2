@@ -1,24 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
- */
 package DAL;
 
 import lombok.Data;
 import java.util.Date;
 import javax.persistence.*;
-/**
- *
- * @author ADMIN
- */
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
+
 @Data
 @Entity
-@Table(name =  "xuly") // should equal to table name in db
+@Table(name = "xuly") // should equal to table name in db
 public class XuLy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int MaXL;
-    
+
+
     @Column(length = 250)
     private String HinhThucXL;
     
