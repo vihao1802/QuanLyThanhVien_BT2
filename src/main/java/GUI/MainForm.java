@@ -13,9 +13,15 @@ import DAL.ThanhVien;
 import DAL.XuLy;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,9 +39,11 @@ public class MainForm extends javax.swing.JFrame {
 
     public MainForm() {
         initComponents();
+        runMain();
+        
         thanhvienBLL = new ThanhVienBLL();
         xlBLL = new XuLyBLL();
-        
+        loadDataTableXuLy();
     }
     
     public void loadDataThanhVienToTableThanhVienMuonTra() {
@@ -129,6 +137,18 @@ public class MainForm extends javax.swing.JFrame {
         jTbl_qlThanhVien = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        panelxuly = new javax.swing.JPanel();
+        panel_topXuLy = new javax.swing.JPanel();
+        jtf_xuly = new javax.swing.JTextField();
+        btn_addxuly = new javax.swing.JButton();
+        reload_xuly = new javax.swing.JButton();
+        jsp_mainXuLy = new javax.swing.JScrollPane();
+        tb_xuly = new javax.swing.JTable() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -147,7 +167,6 @@ public class MainForm extends javax.swing.JFrame {
         jPanel_formVaoKhuHocTap.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabe_DienMaTV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabe_DienMaTV.setForeground(new java.awt.Color(0, 0, 0));
         jLabe_DienMaTV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabe_DienMaTV.setText("Điền mã thành viên để vào khu học tập");
 
@@ -208,7 +227,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(107, Short.MAX_VALUE)
+                .addContainerGap(110, Short.MAX_VALUE)
                 .addComponent(jPanel_formVaoKhuHocTap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(139, 139, 139))
         );
@@ -247,7 +266,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -278,7 +297,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton3)
                     .addComponent(jRadioButton4))
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
@@ -302,7 +321,7 @@ public class MainForm extends javax.swing.JFrame {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addComponent(jDateNgayMT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -371,7 +390,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
@@ -395,16 +414,16 @@ public class MainForm extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
+                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,7 +599,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jtf_searchInQLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBtn_xoaThanhVien, jButton5});
@@ -595,21 +614,127 @@ public class MainForm extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addGap(0, 703, Short.MAX_VALUE)
         );
 
         jTabbedPane_QLTV.addTab("Quản lý thiết bị", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-device-manager-30.png")), jPanel3, "Quản lý thiết bị"); // NOI18N
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 811, Short.MAX_VALUE)
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        panelxuly.setBackground(new java.awt.Color(255, 255, 255));
+        panelxuly.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
+        panelxuly.setLayout(new java.awt.BorderLayout());
+
+        panel_topXuLy.setBackground(new java.awt.Color(255, 255, 255));
+        panel_topXuLy.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Action", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        panel_topXuLy.setPreferredSize(new java.awt.Dimension(408, 80));
+
+        jtf_xuly.setText("Search by ......");
+        jtf_xuly.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_xulyFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_xulyFocusLost(evt);
+            }
+        });
+        jtf_xuly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_xulyActionPerformed(evt);
+            }
+        });
+
+        btn_addxuly.setBackground(new java.awt.Color(51, 204, 255));
+        btn_addxuly.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_addxuly.setForeground(new java.awt.Color(255, 255, 255));
+        btn_addxuly.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_addxuly.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_addxuly.setLabel("Add");
+        btn_addxuly.setName(""); // NOI18N
+        btn_addxuly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addxulyActionPerformed(evt);
+            }
+        });
+
+        reload_xuly.setBackground(new java.awt.Color(153, 153, 153));
+        reload_xuly.setIcon(new javax.swing.ImageIcon("C:\\Users\\ANH KHOA\\OneDrive\\Máy tính\\LabPLop\\Lab1_final\\QuanLyLopHoc_BT1-main\\src\\main\\java\\Icon\\icons8-reload-30.png")); // NOI18N
+        reload_xuly.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reload_xuly.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        reload_xuly.setPreferredSize(new java.awt.Dimension(40, 40));
+        reload_xuly.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reload_xulyMouseClicked(evt);
+            }
+        });
+        reload_xuly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reload_xulyActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_topXuLyLayout = new javax.swing.GroupLayout(panel_topXuLy);
+        panel_topXuLy.setLayout(panel_topXuLyLayout);
+        panel_topXuLyLayout.setHorizontalGroup(
+            panel_topXuLyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_topXuLyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jtf_xuly, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
+                .addComponent(btn_addxuly, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(reload_xuly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+        panel_topXuLyLayout.setVerticalGroup(
+            panel_topXuLyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_topXuLyLayout.createSequentialGroup()
+                .addGroup(panel_topXuLyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_topXuLyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtf_xuly, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_addxuly, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(reload_xuly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
+
+        panelxuly.add(panel_topXuLy, java.awt.BorderLayout.NORTH);
+
+        tb_xuly.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã xử lý", "Mã thành viên", "Hình thức Xl", "Tiền phạt", "Ngày xử lý", "Trạng thái"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tb_xuly.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_xulyClicked(evt);
+            }
+        });
+        jsp_mainXuLy.setViewportView(tb_xuly);
+
+        panelxuly.add(jsp_mainXuLy, java.awt.BorderLayout.CENTER);
+
+        jPanel4.add(panelxuly, java.awt.BorderLayout.CENTER);
 
         jTabbedPane_QLTV.addTab("Xử lý vi phạm", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-warning-30.png")), jPanel4, "Xử lý vi phạm"); // NOI18N
 
@@ -621,21 +746,12 @@ public class MainForm extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addGap(0, 703, Short.MAX_VALUE)
         );
 
         jTabbedPane_QLTV.addTab("Thống kê", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-statistic-30.png")), jPanel5, "Thống kê"); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane_QLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane_QLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jTabbedPane_QLTV, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -786,6 +902,131 @@ public class MainForm extends javax.swing.JFrame {
         loadDataThanhVienToTableThanhVienMuonTra();
     }//GEN-LAST:event_jTabbedPane_QLTVMouseClicked
 
+    private void tb_xulyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_xulyClicked
+        if (evt.getButton() == MouseEvent.BUTTON1 && evt.getClickCount() == 2) {
+            String id = tb_xuly.getValueAt(tb_xuly.getSelectedRow(), 0).toString();
+            FormXuLy formXuLy = new FormXuLy( id, "showinforXuLy", tb_xuly);
+        }
+    }//GEN-LAST:event_tb_xulyClicked
+
+    private void reload_xulyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reload_xulyActionPerformed
+        jtf_xuly.setText("Search by ......");
+        addPlaceHolderStyle(jtf_xuly);
+        loadDataTableXuLy();
+    }//GEN-LAST:event_reload_xulyActionPerformed
+
+    private void reload_xulyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reload_xulyMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reload_xulyMouseClicked
+
+    private void btn_addxulyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addxulyActionPerformed
+        FormXuLy formXuLy = new FormXuLy( null, "addformxuly", tb_xuly);
+    }//GEN-LAST:event_btn_addxulyActionPerformed
+
+    private void jtf_xulyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_xulyActionPerformed
+        String input = jtf_xuly.getText().toLowerCase().trim();
+        DefaultTableModel model = (DefaultTableModel) tb_xuly.getModel();
+        model.setRowCount(0);
+        List<XuLy> listxuly = new XuLyBLL().getAllXuly();
+        for (XuLy tmp : listxuly) {
+            String maXl = tmp.getMaXL() + "";
+            String maTV = tmp.getThanhvien().getMaTV() + "";
+            String hinthuc = tmp.getHinhThucXL();
+            String tien = tmp.getSoTien() != null ? tmp.getSoTien() + "" : "";
+            String dateXL = tmp.getNgayXL() + "";
+            String tinhtrang;
+            if (tmp.getTrangThaiXL() == 0) {
+                tinhtrang = "Chưa xử lý";
+            } else {
+                tinhtrang = "Đã xử lý";
+            }
+
+            if (maXl.toLowerCase().contains(input)
+                    || maTV.toLowerCase().contains(input)
+                    || hinthuc.toLowerCase().contains(input)
+                    || tien.toLowerCase().contains(input)
+                    || dateXL.toLowerCase().contains(input)
+                    || tinhtrang.toLowerCase().contains(input)) {
+                if (tmp.getTrangThaiXL() == 0) {
+                tinhtrang = "Chưa xử lý";
+                } else {
+                    tinhtrang = "Đã xử lý";
+                }
+                model.addRow(new Object[] { tmp.getMaXL(), tmp.getThanhvien().getMaTV(), tmp.getHinhThucXL(), tmp.getSoTien(), tmp.getNgayXL(), tinhtrang});
+            }
+        }
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+        tb_xuly.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tb_xuly.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tb_xuly.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        tb_xuly.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        tb_xuly.getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
+        tb_xuly.setRowHeight(25);
+
+    }//GEN-LAST:event_jtf_xulyActionPerformed
+
+    private void jtf_xulyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_xulyFocusLost
+       if (jtf_xuly.getText().length() == 0) {
+            addPlaceHolderStyle(jtf_xuly);
+            jtf_xuly.setText("Search by ......");
+        }
+    }//GEN-LAST:event_jtf_xulyFocusLost
+
+    private void jtf_xulyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_xulyFocusGained
+      if (jtf_xuly.getText().equals("Search by ......")) {
+            jtf_xuly.setText(null);
+            jtf_xuly.requestFocus();
+        }
+    }//GEN-LAST:event_jtf_xulyFocusGained
+    public void loadDataTableXuLy() {
+        DefaultTableModel model = (DefaultTableModel) tb_xuly.getModel();
+        model.setRowCount(0);
+        XuLyBLL xulyBLL = new XuLyBLL();
+        List<XuLy> listXuly = xulyBLL.getAllXuly();
+        for (XuLy tmp : listXuly) {
+            String tt;
+            if(tmp.getTrangThaiXL()==0) tt ="Chưa xử lý";
+            else tt ="Đã xử lý";
+            model.addRow(new Object[] { tmp.getMaXL(), tmp.getThanhvien().getMaTV(), tmp.getHinhThucXL(), tmp.getSoTien(), tmp.getNgayXL(), tt});
+        }
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+        tb_xuly.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tb_xuly.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tb_xuly.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        tb_xuly.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        tb_xuly.getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
+        tb_xuly.setRowHeight(25);
+    }
+    public static void loadDataTableXuLy(JTable tablexuly) {
+        DefaultTableModel model = (DefaultTableModel) tablexuly.getModel();
+        model.setRowCount(0);
+        XuLyBLL xulyBLL = new XuLyBLL();
+        List<XuLy> listXuly = xulyBLL.getAllXuly();
+        for (XuLy tmp : listXuly) {
+            String tt;
+            if(tmp.getTrangThaiXL()==0) tt ="Chưa xử lý";
+            else tt ="Đã xử lý";
+            model.addRow(new Object[] { tmp.getMaXL(), tmp.getThanhvien().getMaTV(), tmp.getHinhThucXL(), tmp.getSoTien(), tmp.getNgayXL(), tt});        
+        }
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+        tablexuly.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tablexuly.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tablexuly.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        tablexuly.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        tablexuly.getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
+        tablexuly.setRowHeight(25);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -815,6 +1056,12 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
     }
+    public void runMain() {
+        setTitle("testing");
+        setSize(1000, 700);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
     public void addPlaceHolderStyle(JTextField jtf) {
         Font f = jtf.getFont();
         f = f.deriveFont(Font.ITALIC);
@@ -829,6 +1076,7 @@ public class MainForm extends javax.swing.JFrame {
         jtf.setForeground(Color.black);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_addxuly;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBtn_enterClassZone;
     private javax.swing.JButton jBtn_xoaThanhVien;
@@ -867,10 +1115,16 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTable jTbl_qlThanhVien;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JScrollPane jsp_mainXuLy;
     private javax.swing.JTextField jtf_maThanhVien;
     private javax.swing.JTextField jtf_searchInQLTV;
+    private javax.swing.JTextField jtf_xuly;
+    private javax.swing.JPanel panel_topXuLy;
+    private javax.swing.JPanel panelxuly;
+    private javax.swing.JButton reload_xuly;
     private javax.swing.JTable tbDangKyMuonTra;
     private javax.swing.JTable tbThanhVienMuonTra;
     private javax.swing.JTable tbThietBiMuonTra;
+    private javax.swing.JTable tb_xuly;
     // End of variables declaration//GEN-END:variables
 }
