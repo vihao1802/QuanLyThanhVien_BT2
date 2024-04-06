@@ -1,6 +1,7 @@
 package BLL;
 
 
+import DAL.ThongTinSD;
 import java.util.List;
 import DAL.ThongTinSDDAL;
 
@@ -18,5 +19,9 @@ public class ThongTinSDBLL {
 
     public ThongTinSDBLL() {
         ThongTinSDDAL = new ThongTinSDDAL();
+    }
+    
+    public void add(ThongTinSD obj) {
+        ThongTinSDDAL.add(obj);
     }
 }

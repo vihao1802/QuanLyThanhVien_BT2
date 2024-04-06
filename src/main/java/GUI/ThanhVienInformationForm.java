@@ -4,9 +4,20 @@
  */
 package GUI;
 
+import BLL.ThongTinSDBLL;
+import DAL.ThanhVien;
+import DAL.ThongTinSD;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.TimeZone;
+
 import javax.swing.JFrame;
 
 /**
@@ -52,6 +63,7 @@ public class ThanhVienInformationForm extends javax.swing.JFrame {
         jtf_nganh = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jtf_SDT = new javax.swing.JTextField();
+        jLbl_ngayGioVao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -110,6 +122,11 @@ public class ThanhVienInformationForm extends javax.swing.JFrame {
         jtf_SDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtf_SDT.setText("0912345678");
 
+        jLbl_ngayGioVao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLbl_ngayGioVao.setForeground(new java.awt.Color(102, 102, 102));
+        jLbl_ngayGioVao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbl_ngayGioVao.setText("Ngày giờ vào: 11/09/2001");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -127,7 +144,8 @@ public class ThanhVienInformationForm extends javax.swing.JFrame {
                     .addComponent(jtf_HoTen)
                     .addComponent(jtf_khoa)
                     .addComponent(jtf_nganh)
-                    .addComponent(jtf_SDT, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))
+                    .addComponent(jtf_SDT, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                    .addComponent(jLbl_ngayGioVao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -135,15 +153,17 @@ public class ThanhVienInformationForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLbl_ngayGioVao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtf_MaTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtf_HoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtf_khoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,9 +173,9 @@ public class ThanhVienInformationForm extends javax.swing.JFrame {
                 .addComponent(jtf_nganh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtf_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,6 +235,27 @@ public class ThanhVienInformationForm extends javax.swing.JFrame {
         jtf_SDT.setText(sdt);
         jtf_khoa.setText(khoa);
         jtf_nganh.setText(nganh);
+        
+        // Get current date time
+        LocalDateTime now = LocalDateTime.now();  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        String currentTime = dtf.format(now);
+        jLbl_ngayGioVao.setText("Ngày giờ vào: " + currentTime);
+
+        // Create ThanhVien
+        ThanhVien tv = new ThanhVien();
+        tv.setMaTV(maTV);
+        tv.setHoTen(hoten);
+
+        ThongTinSD ttsd = new ThongTinSD();
+        ttsd.setThanhvien(tv);
+        System.out.println(Timestamp.valueOf(now));
+        ttsd.setTGVao(Timestamp.valueOf(now)); // Convert LocalDateTime to Timestamp directly
+
+
+        // add ThoiGianVao of ThanhVien into database
+        ThongTinSDBLL ttsdBLL = new ThongTinSDBLL();
+        ttsdBLL.add(ttsd);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -224,6 +265,7 @@ public class ThanhVienInformationForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLbl_ngayGioVao;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jtf_HoTen;
     private javax.swing.JTextField jtf_MaTV;

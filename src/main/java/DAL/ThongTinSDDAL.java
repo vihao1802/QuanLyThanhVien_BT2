@@ -52,6 +52,8 @@ public class ThongTinSDDAL {
     public void add(ThongTinSD obj)
     {
         session.save(obj);
+        session.beginTransaction();
+        session.getTransaction().commit();
     }
     public void update(ThongTinSD obj)
     {
