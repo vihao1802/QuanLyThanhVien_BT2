@@ -11,6 +11,7 @@ import BLL.ThietBiBLL;
 import BLL.XuLyBLL;
 import DAL.ThanhVien;
 import DAL.XuLy;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -91,7 +92,7 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        btnGroupTV = new javax.swing.ButtonGroup();
         jTabbedPane_QLTV = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel_formVaoKhuHocTap = new javax.swing.JPanel();
@@ -150,6 +151,18 @@ public class MainForm extends javax.swing.JFrame {
             }
         };
         jPanel5 = new javax.swing.JPanel();
+        tabThongke = new javax.swing.JTabbedPane();
+        pnThongkeTB = new javax.swing.JPanel();
+        pnThongkeTV = new javax.swing.JPanel();
+        pnChartmember = new javax.swing.JPanel();
+        pnoptionmember = new javax.swing.JPanel();
+        pnTimeTV = new javax.swing.JPanel();
+        pnKhoaNganh = new javax.swing.JPanel();
+        jRadioKhoaTV = new javax.swing.JRadioButton();
+        jRadioNganhTV = new javax.swing.JRadioButton();
+
+        btnGroupTV.add(jRadioKhoaTV);
+        btnGroupTV.add(jRadioNganhTV);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phần mềm quản lý thành viên");
@@ -232,7 +245,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(114, Short.MAX_VALUE)
+                .addContainerGap(144, Short.MAX_VALUE)
                 .addComponent(jPanel_formVaoKhuHocTap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(139, 139, 139))
         );
@@ -279,10 +292,10 @@ public class MainForm extends javax.swing.JFrame {
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chọn tác vụ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 0, 14))); // NOI18N
         jPanel14.setPreferredSize(new java.awt.Dimension(10, 50));
 
-        buttonGroup1.add(jRadioButton3);
+        btnGroupTV.add(jRadioButton3);
         jRadioButton3.setText("Trả thiết bị");
 
-        buttonGroup1.add(jRadioButton4);
+        btnGroupTV.add(jRadioButton4);
         jRadioButton4.setText("Mượn thiết bị");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -419,16 +432,16 @@ public class MainForm extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
+                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -492,7 +505,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jTextField3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -602,7 +615,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jtf_searchInQLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBtn_xoaThanhVien, jButton5});
@@ -617,7 +630,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addGap(0, 737, Short.MAX_VALUE)
         );
 
         jTabbedPane_QLTV.addTab("Quản lý thiết bị", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-device-manager-30.png")), jPanel3, "Quản lý thiết bị"); // NOI18N
@@ -740,15 +753,82 @@ public class MainForm extends javax.swing.JFrame {
 
         jTabbedPane_QLTV.addTab("Xử lý vi phạm", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-warning-30.png")), jPanel4, "Xử lý vi phạm"); // NOI18N
 
+        tabThongke.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnThongkeTBLayout = new javax.swing.GroupLayout(pnThongkeTB);
+        pnThongkeTB.setLayout(pnThongkeTBLayout);
+        pnThongkeTBLayout.setHorizontalGroup(
+            pnThongkeTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+        pnThongkeTBLayout.setVerticalGroup(
+            pnThongkeTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 702, Short.MAX_VALUE)
+        );
+
+        tabThongke.addTab("Thiết bị", pnThongkeTB);
+
+        pnThongkeTV.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout pnChartmemberLayout = new javax.swing.GroupLayout(pnChartmember);
+        pnChartmember.setLayout(pnChartmemberLayout);
+        pnChartmemberLayout.setHorizontalGroup(
+            pnChartmemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+        pnChartmemberLayout.setVerticalGroup(
+            pnChartmemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 571, Short.MAX_VALUE)
+        );
+
+        pnThongkeTV.add(pnChartmember, java.awt.BorderLayout.CENTER);
+
+        pnoptionmember.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout pnTimeTVLayout = new javax.swing.GroupLayout(pnTimeTV);
+        pnTimeTV.setLayout(pnTimeTVLayout);
+        pnTimeTVLayout.setHorizontalGroup(
+            pnTimeTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+        pnTimeTVLayout.setVerticalGroup(
+            pnTimeTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        pnoptionmember.add(pnTimeTV, java.awt.BorderLayout.CENTER);
+
+        jRadioKhoaTV.setText("Khoa");
+        jRadioKhoaTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioKhoaTVActionPerformed(evt);
+            }
+        });
+        pnKhoaNganh.add(jRadioKhoaTV);
+
+        jRadioNganhTV.setText("Ngành");
+        jRadioNganhTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioNganhTVActionPerformed(evt);
+            }
+        });
+        pnKhoaNganh.add(jRadioNganhTV);
+
+        pnoptionmember.add(pnKhoaNganh, java.awt.BorderLayout.PAGE_START);
+
+        pnThongkeTV.add(pnoptionmember, java.awt.BorderLayout.PAGE_START);
+
+        tabThongke.addTab("Thành viên", pnThongkeTV);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 811, Short.MAX_VALUE)
+            .addComponent(tabThongke)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addComponent(tabThongke)
         );
 
         jTabbedPane_QLTV.addTab("Thống kê", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-statistic-30.png")), jPanel5, "Thống kê"); // NOI18N
@@ -992,6 +1072,24 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         checkEnterClass();
     }//GEN-LAST:event_jtf_maThanhVienActionPerformed
+
+    private void jRadioKhoaTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioKhoaTVActionPerformed
+        // TODO add your handling code here:
+        pnChartmember.removeAll();
+        pnChartmember.revalidate();
+        pnChartmember.repaint();
+        pnChartmember.setLayout(new BorderLayout());
+        pnChartmember.add(new MemberChart("Khoa","",""),BorderLayout.CENTER);
+    }//GEN-LAST:event_jRadioKhoaTVActionPerformed
+
+    private void jRadioNganhTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioNganhTVActionPerformed
+        // TODO add your handling code here:
+        pnChartmember.removeAll();
+        pnChartmember.revalidate();
+        pnChartmember.repaint();
+        pnChartmember.setLayout(new BorderLayout());
+        pnChartmember.add(new MemberChart("Ngành","",""),BorderLayout.CENTER);
+    }//GEN-LAST:event_jRadioNganhTVActionPerformed
     public void loadDataTableXuLy() {
         DefaultTableModel model = (DefaultTableModel) tb_xuly.getModel();
         model.setRowCount(0);
@@ -1086,8 +1184,8 @@ public class MainForm extends javax.swing.JFrame {
         jtf.setForeground(Color.black);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btnGroupTV;
     private javax.swing.JButton btn_addxuly;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBtn_enterClassZone;
     private javax.swing.JButton jBtn_xoaThanhVien;
     private javax.swing.JButton jButton11;
@@ -1114,6 +1212,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_formVaoKhuHocTap;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioKhoaTV;
+    private javax.swing.JRadioButton jRadioNganhTV;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1131,7 +1231,14 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_xuly;
     private javax.swing.JPanel panel_topXuLy;
     private javax.swing.JPanel panelxuly;
+    private javax.swing.JPanel pnChartmember;
+    private javax.swing.JPanel pnKhoaNganh;
+    private javax.swing.JPanel pnThongkeTB;
+    private javax.swing.JPanel pnThongkeTV;
+    private javax.swing.JPanel pnTimeTV;
+    private javax.swing.JPanel pnoptionmember;
     private javax.swing.JButton reload_xuly;
+    private javax.swing.JTabbedPane tabThongke;
     private javax.swing.JTable tbDangKyMuonTra;
     private javax.swing.JTable tbThanhVienMuonTra;
     private javax.swing.JTable tbThietBiMuonTra;

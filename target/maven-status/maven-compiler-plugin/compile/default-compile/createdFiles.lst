@@ -1,4 +1,5 @@
 GUI\MainForm$7.class
+GUI\MemberChart.class
 DAL\ThongTinSDDAL.class
 DAL\ThanhVienDAL.class
 GUI\MainForm$11.class
@@ -24,6 +25,7 @@ GUI\MainForm$16.class
 DAL\XuLy.class
 GUI\MainForm$12.class
 GUI\ThanhVienInformationForm$1.class
+GUI\MainForm$19.class
 BLL\ThanhVienBLL.class
 GUI\FormXuLy$4.class
 GUI\MainForm$5.class
@@ -37,5 +39,6 @@ BLL\ThongTinSDBLL.class
 DAL\XuLyDAL.class
 GUI\MainForm$4.class
 GUI\MainForm$18.class
+GUI\MainForm$20.class
 GUI\ThanhVienInformationForm$2.class
 GUI\FormXuLy$3.class
