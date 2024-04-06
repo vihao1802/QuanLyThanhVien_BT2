@@ -1,7 +1,6 @@
 GUI\MainForm$7.class
 DAL\ThongTinSDDAL.class
 DAL\ThanhVienDAL.class
-GUI\FormXuLy$5.class
 GUI\MainForm$11.class
 DAL\ThietBiDAL.class
 GUI\MainForm$3.class
@@ -11,6 +10,7 @@ DAL\HibernateUtil.class
 GUI\MainForm$14.class
 GUI\ThanhVienInformationForm.class
 DAL\ThanhVien.class
+GUI\MainForm$17.class
 BLL\XuLyBLL.class
 GUI\FormXuLy$1.class
 GUI\MainForm$6.class
@@ -29,7 +29,6 @@ GUI\FormXuLy$4.class
 GUI\MainForm$5.class
 DAL\ThietBi.class
 GUI\MainForm$8.class
-GUI\FormXuLy$6.class
 GUI\MainForm$1.class
 com\mycompany\qlthanhvien_bt2\QLThanhVien_BT2.class
 DAL\ThongTinSD.class
@@ -37,5 +36,6 @@ GUI\MainForm$15.class
 BLL\ThongTinSDBLL.class
 DAL\XuLyDAL.class
 GUI\MainForm$4.class
+GUI\MainForm$18.class
 GUI\ThanhVienInformationForm$2.class
 GUI\FormXuLy$3.class
