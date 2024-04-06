@@ -5,6 +5,7 @@
 package com.mycompany.qlthanhvien_bt2;
 import DAL.ThanhVien;
 import DAL.ThanhVienDAL;
+import GUI.MainForm;
 import java.util.List;
 
 /**
@@ -19,5 +20,6 @@ public class QLThanhVien_BT2 {
         for (ThanhVien tv : tvlist) {
             System.out.print(tv.getListXuLy()+ "\n");
         }
+        new MainForm();
     }
 }
