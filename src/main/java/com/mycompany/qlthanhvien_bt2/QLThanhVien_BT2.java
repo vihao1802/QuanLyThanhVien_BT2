@@ -15,11 +15,11 @@ import java.util.List;
 public class QLThanhVien_BT2 {
 
     public static void main(String[] args) {
-        ThanhVienDAL tvDAL = new ThanhVienDAL();
-        List<ThanhVien> tvlist = tvDAL.loadThanhVien();
-        for (ThanhVien tv : tvlist) {
-            System.out.print(tv.getListXuLy()+ "\n");
-        }
+//        ThanhVienDAL tvDAL = new ThanhVienDAL();
+//        List<ThanhVien> tvlist = tvDAL.loadThanhVien();
+//        for (ThanhVien tv : tvlist) {
+//            System.out.print(tv.getListXuLy()+ "\n");
+//        }
         new MainForm();
     }
 }
