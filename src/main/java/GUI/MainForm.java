@@ -10,12 +10,16 @@ import BLL.ThanhVienBLL;
 import BLL.ThietBiBLL;
 import BLL.XuLyBLL;
 import DAL.ThanhVien;
+import DAL.ThietBi;
 import DAL.XuLy;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -43,6 +47,7 @@ public class MainForm extends javax.swing.JFrame {
         runMain();
         
         thanhvienBLL = new ThanhVienBLL();
+        thietbiBLL = new ThietBiBLL();
         xlBLL = new XuLyBLL();
         loadDataTableXuLy();
     }
@@ -93,6 +98,7 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         btnGroupTV = new javax.swing.ButtonGroup();
+        btnGroupTB = new javax.swing.ButtonGroup();
         jTabbedPane_QLTV = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel_formVaoKhuHocTap = new javax.swing.JPanel();
@@ -153,6 +159,13 @@ public class MainForm extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         tabThongke = new javax.swing.JTabbedPane();
         pnThongkeTB = new javax.swing.JPanel();
+        pnDeviceChart = new javax.swing.JPanel();
+        pnOptionTB = new javax.swing.JPanel();
+        pn2ndOptionTB = new javax.swing.JPanel();
+        cbTenTB = new javax.swing.JComboBox<>();
+        jPanel10 = new javax.swing.JPanel();
+        jRadioTenTB = new javax.swing.JRadioButton();
+        jRadioTimeTB = new javax.swing.JRadioButton();
         pnThongkeTV = new javax.swing.JPanel();
         pnChartmember = new javax.swing.JPanel();
         pnoptionmember = new javax.swing.JPanel();
@@ -754,17 +767,59 @@ public class MainForm extends javax.swing.JFrame {
         jTabbedPane_QLTV.addTab("Xử lý vi phạm", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-warning-30.png")), jPanel4, "Xử lý vi phạm"); // NOI18N
 
         tabThongke.setBackground(new java.awt.Color(255, 255, 255));
+        tabThongke.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabThongkeMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout pnThongkeTBLayout = new javax.swing.GroupLayout(pnThongkeTB);
-        pnThongkeTB.setLayout(pnThongkeTBLayout);
-        pnThongkeTBLayout.setHorizontalGroup(
-            pnThongkeTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnThongkeTB.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout pnDeviceChartLayout = new javax.swing.GroupLayout(pnDeviceChart);
+        pnDeviceChart.setLayout(pnDeviceChartLayout);
+        pnDeviceChartLayout.setHorizontalGroup(
+            pnDeviceChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 810, Short.MAX_VALUE)
         );
-        pnThongkeTBLayout.setVerticalGroup(
-            pnThongkeTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 702, Short.MAX_VALUE)
+        pnDeviceChartLayout.setVerticalGroup(
+            pnDeviceChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 639, Short.MAX_VALUE)
         );
+
+        pnThongkeTB.add(pnDeviceChart, java.awt.BorderLayout.CENTER);
+
+        pnOptionTB.setLayout(new java.awt.BorderLayout());
+
+        cbTenTB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbTenTB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbTenTBItemStateChanged(evt);
+            }
+        });
+        cbTenTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTenTBActionPerformed(evt);
+            }
+        });
+        pn2ndOptionTB.add(cbTenTB);
+        cbTenTB.setVisible(false);
+
+        pnOptionTB.add(pn2ndOptionTB, java.awt.BorderLayout.CENTER);
+
+        jRadioTenTB.setText("Thời gian");
+        jPanel10.add(jRadioTenTB);
+
+        jRadioTimeTB.setText("Tên thiết bị");
+        jRadioTimeTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioTimeTBActionPerformed(evt);
+            }
+        });
+        jPanel10.add(jRadioTimeTB);
+
+        pnOptionTB.add(jPanel10, java.awt.BorderLayout.PAGE_START);
+
+        pnThongkeTB.add(pnOptionTB, java.awt.BorderLayout.PAGE_START);
 
         tabThongke.addTab("Thiết bị", pnThongkeTB);
 
@@ -1090,6 +1145,51 @@ public class MainForm extends javax.swing.JFrame {
         pnChartmember.setLayout(new BorderLayout());
         pnChartmember.add(new MemberChart("Ngành","",""),BorderLayout.CENTER);
     }//GEN-LAST:event_jRadioNganhTVActionPerformed
+
+    private void tabThongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabThongkeMouseClicked
+        // TODO add your handling code here:
+        jRadioKhoaTV.setSelected(true);
+        pnChartmember.removeAll();
+        pnChartmember.revalidate();
+        pnChartmember.repaint();
+        pnChartmember.setLayout(new BorderLayout());
+        pnChartmember.add(new MemberChart("Khoa","",""),BorderLayout.CENTER);
+    }//GEN-LAST:event_tabThongkeMouseClicked
+
+    private void jRadioTimeTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioTimeTBActionPerformed
+        // TODO add your handling code here:
+        cbTenTB.setVisible(true);
+        cbTenTB.removeAllItems();
+        List<ThietBi> list=this.thietbiBLL.loadThietBi();
+        Set<String> addedNames = new HashSet<>();
+        // Thêm các tên thiết bị vào JComboBox, loại bỏ các tên trùng lặp
+        for (ThietBi data : list) {
+            String tenTB = data.getTenTB();
+            if (!addedNames.contains(tenTB)) {
+                cbTenTB.addItem(tenTB);
+                addedNames.add(tenTB);
+            }
+        }
+    }//GEN-LAST:event_jRadioTimeTBActionPerformed
+
+    private void cbTenTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTenTBActionPerformed
+
+    }//GEN-LAST:event_cbTenTBActionPerformed
+
+    private void cbTenTBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTenTBItemStateChanged
+        // TODO add your handling code here:
+        // Kiểm tra xem sự kiện là sự kiện được chọn hoặc không được chọn
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            // Xóa tất cả các thành phần hiện có trong pnDeviceChart
+            pnDeviceChart.removeAll();
+            pnDeviceChart.revalidate();
+            pnDeviceChart.repaint();
+
+            // Thêm thành phần mới vào pnDeviceChart
+            pnDeviceChart.setLayout(new BorderLayout());
+            pnDeviceChart.add(new DeviceChart("Tên", (String) cbTenTB.getSelectedItem(),"",""), BorderLayout.CENTER);
+        }
+    }//GEN-LAST:event_cbTenTBItemStateChanged
     public void loadDataTableXuLy() {
         DefaultTableModel model = (DefaultTableModel) tb_xuly.getModel();
         model.setRowCount(0);
@@ -1184,8 +1284,10 @@ public class MainForm extends javax.swing.JFrame {
         jtf.setForeground(Color.black);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btnGroupTB;
     private javax.swing.ButtonGroup btnGroupTV;
     private javax.swing.JButton btn_addxuly;
+    private javax.swing.JComboBox<String> cbTenTB;
     private javax.swing.JButton jBtn_enterClassZone;
     private javax.swing.JButton jBtn_xoaThanhVien;
     private javax.swing.JButton jButton11;
@@ -1198,6 +1300,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabe_DienMaTV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel14;
@@ -1214,6 +1317,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioKhoaTV;
     private javax.swing.JRadioButton jRadioNganhTV;
+    private javax.swing.JRadioButton jRadioTenTB;
+    private javax.swing.JRadioButton jRadioTimeTB;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1231,8 +1336,11 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_xuly;
     private javax.swing.JPanel panel_topXuLy;
     private javax.swing.JPanel panelxuly;
+    private javax.swing.JPanel pn2ndOptionTB;
     private javax.swing.JPanel pnChartmember;
+    private javax.swing.JPanel pnDeviceChart;
     private javax.swing.JPanel pnKhoaNganh;
+    private javax.swing.JPanel pnOptionTB;
     private javax.swing.JPanel pnThongkeTB;
     private javax.swing.JPanel pnThongkeTV;
     private javax.swing.JPanel pnTimeTV;

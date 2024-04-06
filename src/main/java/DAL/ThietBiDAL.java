@@ -45,4 +45,19 @@ public class ThietBiDAL {
     {
         session.delete(obj);
     }
+    
+    public int getSLThietBiTheoTen(String name) {
+        String query = "SELECT COUNT(MaTB) "
+                + "FROM ThietBi "
+                + "WHERE TenTB='" + name + "'";
+
+        session.beginTransaction();
+
+        Query<Long> queryResult = session.createQuery(query, Long.class);
+        Long count = queryResult.uniqueResult();
+
+        session.getTransaction().commit();
+
+        return count != null ? count.intValue() : 0;
+    }
 }
