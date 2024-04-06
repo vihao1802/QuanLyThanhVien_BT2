@@ -16,8 +16,11 @@ import DAL.ThongTinSD;
 import DAL.ThongTinSDDAL;
 import DAL.XuLy;
 import com.toedter.calendar.JMonthChooser;
+import com.toedter.calendar.JDateChooser;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
@@ -25,11 +28,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
@@ -37,6 +45,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import oracle.jdbc.xa.OracleXAResource;
 
 /**
  *
@@ -50,6 +59,9 @@ public class MainForm extends javax.swing.JFrame {
     ThanhVienBLL thanhvienBLL;
     ThietBiBLL thietbiBLL;
     XuLyBLL xlBLL;
+    JPanel tmp = new JPanel(new FlowLayout());
+    JDateChooser startDateChooser = new JDateChooser();
+    JDateChooser endDateChooser = new JDateChooser();
 
     public MainForm() {
         initComponents();
@@ -58,8 +70,69 @@ public class MainForm extends javax.swing.JFrame {
         thanhvienBLL = new ThanhVienBLL();
         thietbiBLL = new ThietBiBLL();
         xlBLL = new XuLyBLL();
+        loadTimeOption();
         
     }
+    
+    public void loadTimeOption() {
+        
+        startDateChooser.setDateFormatString("yyyy-MM-dd");
+        startDateChooser.setPreferredSize(new Dimension(150, 30));
+
+        
+        endDateChooser.setDateFormatString("yyyy-MM-dd");
+        endDateChooser.setPreferredSize(new Dimension(150, 30));
+        
+        tmp.add(new JLabel("Start Date:"));
+        tmp.add(startDateChooser);
+        tmp.add(new JLabel("End Date:"));
+        tmp.add(endDateChooser);
+        tmp.setVisible(false);
+        pn2ndOptionTB.add(tmp);
+        
+        startDateChooser.addPropertyChangeListener("date", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals("date")) {
+                    if(endDateChooser.getDate()!=null) {
+                        if(checkDateValidity(startDateChooser.getDate(), endDateChooser.getDate())) {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            pnDeviceChart.removeAll();
+                            pnDeviceChart.revalidate();
+                            pnDeviceChart.repaint();
+                            pnDeviceChart.setLayout(new BorderLayout());
+                            pnDeviceChart.add(new DeviceChart("Time","",dateFormat.format(startDateChooser.getDate()),dateFormat.format(endDateChooser.getDate())),BorderLayout.CENTER);
+                        }
+                    }
+                }
+            }
+        });
+        
+        endDateChooser.addPropertyChangeListener("date", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals("date")) {
+                    if(startDateChooser.getDate()!=null) {
+                        if(checkDateValidity(startDateChooser.getDate(), endDateChooser.getDate())) {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            pnDeviceChart.removeAll();
+                            pnDeviceChart.revalidate();
+                            pnDeviceChart.repaint();
+                            pnDeviceChart.setLayout(new BorderLayout());
+                            pnDeviceChart.add(new DeviceChart("Time","",dateFormat.format(startDateChooser.getDate()),dateFormat.format(endDateChooser.getDate())),BorderLayout.CENTER);
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    public boolean checkDateValidity(Date date1, Date date2) {
+        if (date1 != null && date2 != null && date2.before(date1)) {
+            return false;
+        }
+        return true;
+    } 
     
     public void loadDataThanhVienToTableThanhVienMuonTra() {
         String[] col = new String[] { "Mã thành viên", "Họ tên", "Khoa", "Ngành", "Số điện thoại" };
@@ -215,6 +288,9 @@ public class MainForm extends javax.swing.JFrame {
 
         btnGroupTV.add(jRadioKhoaTV);
         btnGroupTV.add(jRadioNganhTV);
+
+        btnGroupTB.add(jRadioTenTB);
+        btnGroupTB.add(jRadioTimeTB);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phần mềm quản lý thành viên");
@@ -856,6 +932,11 @@ public class MainForm extends javax.swing.JFrame {
         pnOptionTB.add(pn2ndOptionTB, java.awt.BorderLayout.CENTER);
 
         jRadioTenTB.setText("Thời gian");
+        jRadioTenTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioTenTBActionPerformed(evt);
+            }
+        });
         jPanel10.add(jRadioTenTB);
 
         jRadioTimeTB.setText("Tên thiết bị");
@@ -1216,9 +1297,6 @@ public class MainForm extends javax.swing.JFrame {
         String input = jtf_searchInQLTV.getText().toLowerCase().trim();
         DefaultTableModel model = (DefaultTableModel) jTbl_qlThanhVien.getModel();
         model.setRowCount(0);
-        // You can replace this with actual data loading logic from a database or
-        // another source
-//        ArrayList<CourseInstructorDTO> listCourse = cour_instrucBUS.getList();
         List<ThanhVien> list = this.thanhvienBLL.loadThanhVien();
         Object[] row;
         for(ThanhVien tv : list) {
@@ -1265,14 +1343,15 @@ public class MainForm extends javax.swing.JFrame {
                 return;
             }
 
-            ThanhVien tv = new ThanhVien();
-            tv.setMaTV((int) matv);
-            tv.setHoTen((String) hoten);
-            tv.setKhoa((String) khoa);
-            tv.setNganh((String)nganh);
-            tv.setSDT((String)sdt);
-
-            thanhvienBLL.delete(tv);
+//            ThanhVien tv = session.get(Course.class, 4063); 
+//            tv.setMaTV((int) matv);
+//            tv.setHoTen((String) hoten);
+//            tv.setKhoa((String) khoa);
+//            tv.setNganh((String)nganh);
+//            tv.setSDT((String)sdt);
+//            System.out.println(tv);
+            
+            thanhvienBLL.delete((int) matv);
 
             loadDataThanhVienToTableThanhVienMuonTra();
         } else {
@@ -1413,6 +1492,7 @@ public class MainForm extends javax.swing.JFrame {
                 addedNames.add(tenTB);
             }
         }
+        tmp.setVisible(false);
     }//GEN-LAST:event_jRadioTimeTBActionPerformed
 
     private void cbTenTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTenTBActionPerformed
@@ -1593,6 +1673,23 @@ public class MainForm extends javax.swing.JFrame {
             jLabel7.setEnabled(true);
         }
     }//GEN-LAST:event_cbb_kieuTKActionPerformed
+
+    private void jRadioTenTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioTenTBActionPerformed
+        // TODO add your handling code here:
+        cbTenTB.setVisible(false);
+        tmp.setVisible(true);
+        if (endDateChooser.getDate() != null && startDateChooser.getDate() != null) {
+            if (checkDateValidity(startDateChooser.getDate(), endDateChooser.getDate())) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                pnDeviceChart.removeAll();
+                pnDeviceChart.revalidate();
+                pnDeviceChart.repaint();
+                pnDeviceChart.setLayout(new BorderLayout());
+                pnDeviceChart.add(new DeviceChart("Time", "", dateFormat.format(startDateChooser.getDate()), dateFormat.format(endDateChooser.getDate())), BorderLayout.CENTER);
+            }
+        }
+    }//GEN-LAST:event_jRadioTenTBActionPerformed
+
     public void loadDataTableXuLy() {
         DefaultTableModel model = (DefaultTableModel) tb_xuly.getModel();
         model.setRowCount(0);

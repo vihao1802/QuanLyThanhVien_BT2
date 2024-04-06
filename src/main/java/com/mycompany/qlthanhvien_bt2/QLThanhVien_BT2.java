@@ -23,3 +23,4 @@ public class QLThanhVien_BT2 {
         new MainForm();
     }
 }
+

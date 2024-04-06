@@ -27,17 +27,17 @@ public class DeviceChart extends JPanel {
             DefaultCategoryDataset dataset = createDatasetTenTB(tenTB);
             // Tạo biểu đồ cột từ dataset
             chart = ChartFactory.createBarChart(
-                    "Số lần thuê",  // Tiêu đề biểu đồ
-                    "Khoa",                           // Nhãn trục x
-                    "Số lượng thành viên vào",            // Nhãn trục y
+                    "Thiết bị được mượn theo tên",  // Tiêu đề biểu đồ
+                    "Thiết bị",                           // Nhãn trục x
+                    "Số lần",            // Nhãn trục y
                     dataset                           // Dataset
             );
-        } else if(key.equals("Ngành")) {
-            DefaultCategoryDataset dataset = createDatasetNganh();
+        } else if(key.equals("Time")) {
+            DefaultCategoryDataset dataset = createDatasetTime(time1, time2);
             chart = ChartFactory.createBarChart(
-                    "Số lượng thành viên mỗi ngành",  // Tiêu đề biểu đồ
-                    "Ngành",                           // Nhãn trục x
-                    "Số lượng thành viên vào",            // Nhãn trục y
+                    "Thiết bị được mượn theo thời gian",  // Tiêu đề biểu đồ
+                    "Thiết bị",                           // Nhãn trục x
+                    "Số lần",            // Nhãn trục y
                     dataset                           // Dataset
             );
         }
@@ -61,19 +61,16 @@ public class DeviceChart extends JPanel {
     private DefaultCategoryDataset createDatasetTenTB(String tenTB) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(new ThietBiDAL().getSLThietBiTheoTen(tenTB), "Số lượng", tenTB);
-        
-        
         return dataset;
     }
     
     // Tạo dataset với dữ liệu mẫu
-    private DefaultCategoryDataset createDatasetNganh() {
+    private DefaultCategoryDataset createDatasetTime(String time1, String time2) {
         ArrayList<String> listNganh = new ArrayList<>();
-        ArrayList<Integer> SL = new ThanhVienDAL().getSLThanhVienTheoNganh(listNganh);
+        ArrayList<Integer> SL = new ThietBiDAL().getTBTheoThoiGian(listNganh,time1,time2);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<listNganh.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
-            System.out.println("ngành");
         }
         
         return dataset;
