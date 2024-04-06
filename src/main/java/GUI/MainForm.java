@@ -838,9 +838,6 @@ public class MainForm extends javax.swing.JFrame {
         String input = jtf_searchInQLTV.getText().toLowerCase().trim();
         DefaultTableModel model = (DefaultTableModel) jTbl_qlThanhVien.getModel();
         model.setRowCount(0);
-        // You can replace this with actual data loading logic from a database or
-        // another source
-//        ArrayList<CourseInstructorDTO> listCourse = cour_instrucBUS.getList();
         List<ThanhVien> list = this.thanhvienBLL.loadThanhVien();
         Object[] row;
         for(ThanhVien tv : list) {
@@ -887,14 +884,15 @@ public class MainForm extends javax.swing.JFrame {
                 return;
             }
 
-            ThanhVien tv = new ThanhVien();
-            tv.setMaTV((int) matv);
-            tv.setHoTen((String) hoten);
-            tv.setKhoa((String) khoa);
-            tv.setNganh((String)nganh);
-            tv.setSDT((String)sdt);
-
-            thanhvienBLL.delete(tv);
+//            ThanhVien tv = session.get(Course.class, 4063); 
+//            tv.setMaTV((int) matv);
+//            tv.setHoTen((String) hoten);
+//            tv.setKhoa((String) khoa);
+//            tv.setNganh((String)nganh);
+//            tv.setSDT((String)sdt);
+//            System.out.println(tv);
+            
+            thanhvienBLL.delete((int) matv);
 
             loadDataThanhVienToTableThanhVienMuonTra();
         } else {

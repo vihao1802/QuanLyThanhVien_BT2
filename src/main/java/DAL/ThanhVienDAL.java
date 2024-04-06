@@ -41,7 +41,10 @@ public class ThanhVienDAL {
         session.update(obj);
     }
 
-    public void delete(ThanhVien obj) {
-        session.delete(obj);
+    public void delete(int MaTV) {
+        ThanhVien tv = session.get(ThanhVien.class, MaTV); 
+        session.delete(tv);
+        session.beginTransaction();
+        session.getTransaction().commit();
     }
 }

@@ -29,7 +29,7 @@ public class ThanhVienBLL {
         return thanhvienDAL.getThanhVien(MaTV);
     }
     
-    public void delete(ThanhVien tv) {
-        thanhvienDAL.delete(tv);
+    public void delete(int MaTV) {
+        thanhvienDAL.delete(MaTV);
     }
 }

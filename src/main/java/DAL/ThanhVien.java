@@ -38,4 +38,8 @@ public class ThanhVien {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "thanhvien")
     private List<XuLy> listXuLy;
 
+    @Override
+    public String toString() {
+        return "ThanhVien{" + "MaTV=" + MaTV + ", HoTen=" + HoTen + ", Khoa=" + Khoa + ", Nganh=" + Nganh + ", SDT=" + SDT + '}';
+    }
 }
