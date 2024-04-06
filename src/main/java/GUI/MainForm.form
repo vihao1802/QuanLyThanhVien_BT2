@@ -8,6 +8,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.ButtonGroup" name="btnGroupTB">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="btnGroupTB.add(jRadioTenTB);&#xa;btnGroupTB.add(jRadioTimeTB);"/>
+      </AuxValues>
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -1170,6 +1173,9 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Th&#x1edd;i gian"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioTenTBActionPerformed"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="jRadioTimeTB">
                               <Properties>

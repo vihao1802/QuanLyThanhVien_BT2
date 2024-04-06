@@ -12,6 +12,7 @@ GUI\DeviceChart.class
 DAL\HibernateUtil.class
 GUI\MainForm$14.class
 GUI\MainForm$24.class
+GUI\MainForm$25.class
 GUI\ThanhVienInformationForm.class
 DAL\ThanhVien.class
 GUI\MainForm$17.class
