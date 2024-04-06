@@ -10,19 +10,33 @@ import BLL.ThanhVienBLL;
 import BLL.ThietBiBLL;
 import BLL.XuLyBLL;
 import DAL.ThanhVien;
+import DAL.ThietBi;
 import DAL.XuLy;
+import com.toedter.calendar.JDateChooser;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import oracle.jdbc.xa.OracleXAResource;
 
 /**
  *
@@ -36,15 +50,82 @@ public class MainForm extends javax.swing.JFrame {
     ThanhVienBLL thanhvienBLL;
     ThietBiBLL thietbiBLL;
     XuLyBLL xlBLL;
+    JPanel tmp = new JPanel(new FlowLayout());
+    JDateChooser startDateChooser = new JDateChooser();
+    JDateChooser endDateChooser = new JDateChooser();
 
     public MainForm() {
         initComponents();
         runMain();
         
         thanhvienBLL = new ThanhVienBLL();
+        thietbiBLL = new ThietBiBLL();
         xlBLL = new XuLyBLL();
         loadDataTableXuLy();
+        loadTimeOption();
+        
+        
     }
+    
+    public void loadTimeOption() {
+        
+        startDateChooser.setDateFormatString("yyyy-MM-dd");
+        startDateChooser.setPreferredSize(new Dimension(150, 30));
+
+        
+        endDateChooser.setDateFormatString("yyyy-MM-dd");
+        endDateChooser.setPreferredSize(new Dimension(150, 30));
+        
+        tmp.add(new JLabel("Start Date:"));
+        tmp.add(startDateChooser);
+        tmp.add(new JLabel("End Date:"));
+        tmp.add(endDateChooser);
+        tmp.setVisible(false);
+        pn2ndOptionTB.add(tmp);
+        
+        startDateChooser.addPropertyChangeListener("date", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals("date")) {
+                    if(endDateChooser.getDate()!=null) {
+                        if(checkDateValidity(startDateChooser.getDate(), endDateChooser.getDate())) {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            pnDeviceChart.removeAll();
+                            pnDeviceChart.revalidate();
+                            pnDeviceChart.repaint();
+                            pnDeviceChart.setLayout(new BorderLayout());
+                            pnDeviceChart.add(new DeviceChart("Time","",dateFormat.format(startDateChooser.getDate()),dateFormat.format(endDateChooser.getDate())),BorderLayout.CENTER);
+                        }
+                    }
+                }
+            }
+        });
+        
+        endDateChooser.addPropertyChangeListener("date", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals("date")) {
+                    if(startDateChooser.getDate()!=null) {
+                        if(checkDateValidity(startDateChooser.getDate(), endDateChooser.getDate())) {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            pnDeviceChart.removeAll();
+                            pnDeviceChart.revalidate();
+                            pnDeviceChart.repaint();
+                            pnDeviceChart.setLayout(new BorderLayout());
+                            pnDeviceChart.add(new DeviceChart("Time","",dateFormat.format(startDateChooser.getDate()),dateFormat.format(endDateChooser.getDate())),BorderLayout.CENTER);
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    public boolean checkDateValidity(Date date1, Date date2) {
+        if (date1 != null && date2 != null && date2.before(date1)) {
+            return false;
+        }
+        return true;
+    } 
     
     public void loadDataThanhVienToTableThanhVienMuonTra() {
         String[] col = new String[] { "Mã thành viên", "Họ tên", "Khoa", "Ngành", "Số điện thoại" };
@@ -91,7 +172,8 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        btnGroupTV = new javax.swing.ButtonGroup();
+        btnGroupTB = new javax.swing.ButtonGroup();
         jTabbedPane_QLTV = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel_formVaoKhuHocTap = new javax.swing.JPanel();
@@ -150,6 +232,28 @@ public class MainForm extends javax.swing.JFrame {
             }
         };
         jPanel5 = new javax.swing.JPanel();
+        tabThongke = new javax.swing.JTabbedPane();
+        pnThongkeTB = new javax.swing.JPanel();
+        pnDeviceChart = new javax.swing.JPanel();
+        pnOptionTB = new javax.swing.JPanel();
+        pn2ndOptionTB = new javax.swing.JPanel();
+        cbTenTB = new javax.swing.JComboBox<>();
+        jPanel10 = new javax.swing.JPanel();
+        jRadioTenTB = new javax.swing.JRadioButton();
+        jRadioTimeTB = new javax.swing.JRadioButton();
+        pnThongkeTV = new javax.swing.JPanel();
+        pnChartmember = new javax.swing.JPanel();
+        pnoptionmember = new javax.swing.JPanel();
+        pnTimeTV = new javax.swing.JPanel();
+        pnKhoaNganh = new javax.swing.JPanel();
+        jRadioKhoaTV = new javax.swing.JRadioButton();
+        jRadioNganhTV = new javax.swing.JRadioButton();
+
+        btnGroupTV.add(jRadioKhoaTV);
+        btnGroupTV.add(jRadioNganhTV);
+
+        btnGroupTB.add(jRadioTenTB);
+        btnGroupTB.add(jRadioTimeTB);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phần mềm quản lý thành viên");
@@ -232,7 +336,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(114, Short.MAX_VALUE)
+                .addContainerGap(144, Short.MAX_VALUE)
                 .addComponent(jPanel_formVaoKhuHocTap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(139, 139, 139))
         );
@@ -279,10 +383,10 @@ public class MainForm extends javax.swing.JFrame {
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chọn tác vụ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 0, 14))); // NOI18N
         jPanel14.setPreferredSize(new java.awt.Dimension(10, 50));
 
-        buttonGroup1.add(jRadioButton3);
+        btnGroupTV.add(jRadioButton3);
         jRadioButton3.setText("Trả thiết bị");
 
-        buttonGroup1.add(jRadioButton4);
+        btnGroupTV.add(jRadioButton4);
         jRadioButton4.setText("Mượn thiết bị");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -419,16 +523,16 @@ public class MainForm extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
+                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -492,7 +596,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jTextField3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -602,7 +706,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jtf_searchInQLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBtn_xoaThanhVien, jButton5});
@@ -617,7 +721,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addGap(0, 737, Short.MAX_VALUE)
         );
 
         jTabbedPane_QLTV.addTab("Quản lý thiết bị", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-device-manager-30.png")), jPanel3, "Quản lý thiết bị"); // NOI18N
@@ -740,15 +844,129 @@ public class MainForm extends javax.swing.JFrame {
 
         jTabbedPane_QLTV.addTab("Xử lý vi phạm", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-warning-30.png")), jPanel4, "Xử lý vi phạm"); // NOI18N
 
+        tabThongke.setBackground(new java.awt.Color(255, 255, 255));
+        tabThongke.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabThongkeMouseClicked(evt);
+            }
+        });
+
+        pnThongkeTB.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout pnDeviceChartLayout = new javax.swing.GroupLayout(pnDeviceChart);
+        pnDeviceChart.setLayout(pnDeviceChartLayout);
+        pnDeviceChartLayout.setHorizontalGroup(
+            pnDeviceChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+        pnDeviceChartLayout.setVerticalGroup(
+            pnDeviceChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 639, Short.MAX_VALUE)
+        );
+
+        pnThongkeTB.add(pnDeviceChart, java.awt.BorderLayout.CENTER);
+
+        pnOptionTB.setLayout(new java.awt.BorderLayout());
+
+        cbTenTB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbTenTB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbTenTBItemStateChanged(evt);
+            }
+        });
+        cbTenTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTenTBActionPerformed(evt);
+            }
+        });
+        pn2ndOptionTB.add(cbTenTB);
+        cbTenTB.setVisible(false);
+
+        pnOptionTB.add(pn2ndOptionTB, java.awt.BorderLayout.CENTER);
+
+        jRadioTenTB.setText("Thời gian");
+        jRadioTenTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioTenTBActionPerformed(evt);
+            }
+        });
+        jPanel10.add(jRadioTenTB);
+
+        jRadioTimeTB.setText("Tên thiết bị");
+        jRadioTimeTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioTimeTBActionPerformed(evt);
+            }
+        });
+        jPanel10.add(jRadioTimeTB);
+
+        pnOptionTB.add(jPanel10, java.awt.BorderLayout.PAGE_START);
+
+        pnThongkeTB.add(pnOptionTB, java.awt.BorderLayout.PAGE_START);
+
+        tabThongke.addTab("Thiết bị", pnThongkeTB);
+
+        pnThongkeTV.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout pnChartmemberLayout = new javax.swing.GroupLayout(pnChartmember);
+        pnChartmember.setLayout(pnChartmemberLayout);
+        pnChartmemberLayout.setHorizontalGroup(
+            pnChartmemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+        pnChartmemberLayout.setVerticalGroup(
+            pnChartmemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 571, Short.MAX_VALUE)
+        );
+
+        pnThongkeTV.add(pnChartmember, java.awt.BorderLayout.CENTER);
+
+        pnoptionmember.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout pnTimeTVLayout = new javax.swing.GroupLayout(pnTimeTV);
+        pnTimeTV.setLayout(pnTimeTVLayout);
+        pnTimeTVLayout.setHorizontalGroup(
+            pnTimeTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+        pnTimeTVLayout.setVerticalGroup(
+            pnTimeTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        pnoptionmember.add(pnTimeTV, java.awt.BorderLayout.CENTER);
+
+        jRadioKhoaTV.setText("Khoa");
+        jRadioKhoaTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioKhoaTVActionPerformed(evt);
+            }
+        });
+        pnKhoaNganh.add(jRadioKhoaTV);
+
+        jRadioNganhTV.setText("Ngành");
+        jRadioNganhTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioNganhTVActionPerformed(evt);
+            }
+        });
+        pnKhoaNganh.add(jRadioNganhTV);
+
+        pnoptionmember.add(pnKhoaNganh, java.awt.BorderLayout.PAGE_START);
+
+        pnThongkeTV.add(pnoptionmember, java.awt.BorderLayout.PAGE_START);
+
+        tabThongke.addTab("Thành viên", pnThongkeTV);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 811, Short.MAX_VALUE)
+            .addComponent(tabThongke)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addComponent(tabThongke)
         );
 
         jTabbedPane_QLTV.addTab("Thống kê", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-statistic-30.png")), jPanel5, "Thống kê"); // NOI18N
@@ -990,6 +1208,86 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         checkEnterClass();
     }//GEN-LAST:event_jtf_maThanhVienActionPerformed
+
+    private void jRadioKhoaTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioKhoaTVActionPerformed
+        // TODO add your handling code here:
+        pnChartmember.removeAll();
+        pnChartmember.revalidate();
+        pnChartmember.repaint();
+        pnChartmember.setLayout(new BorderLayout());
+        pnChartmember.add(new MemberChart("Khoa","",""),BorderLayout.CENTER);
+    }//GEN-LAST:event_jRadioKhoaTVActionPerformed
+
+    private void jRadioNganhTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioNganhTVActionPerformed
+        // TODO add your handling code here:
+        pnChartmember.removeAll();
+        pnChartmember.revalidate();
+        pnChartmember.repaint();
+        pnChartmember.setLayout(new BorderLayout());
+        pnChartmember.add(new MemberChart("Ngành","",""),BorderLayout.CENTER);
+    }//GEN-LAST:event_jRadioNganhTVActionPerformed
+
+    private void tabThongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabThongkeMouseClicked
+        // TODO add your handling code here:
+        jRadioKhoaTV.setSelected(true);
+        pnChartmember.removeAll();
+        pnChartmember.revalidate();
+        pnChartmember.repaint();
+        pnChartmember.setLayout(new BorderLayout());
+        pnChartmember.add(new MemberChart("Khoa","",""),BorderLayout.CENTER);
+    }//GEN-LAST:event_tabThongkeMouseClicked
+
+    private void jRadioTimeTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioTimeTBActionPerformed
+        // TODO add your handling code here:
+        cbTenTB.setVisible(true);
+        cbTenTB.removeAllItems();
+        List<ThietBi> list=this.thietbiBLL.loadThietBi();
+        Set<String> addedNames = new HashSet<>();
+        // Thêm các tên thiết bị vào JComboBox, loại bỏ các tên trùng lặp
+        for (ThietBi data : list) {
+            String tenTB = data.getTenTB();
+            if (!addedNames.contains(tenTB)) {
+                cbTenTB.addItem(tenTB);
+                addedNames.add(tenTB);
+            }
+        }
+        tmp.setVisible(false);
+    }//GEN-LAST:event_jRadioTimeTBActionPerformed
+
+    private void cbTenTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTenTBActionPerformed
+
+    }//GEN-LAST:event_cbTenTBActionPerformed
+
+    private void cbTenTBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTenTBItemStateChanged
+        // TODO add your handling code here:
+        // Kiểm tra xem sự kiện là sự kiện được chọn hoặc không được chọn
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            // Xóa tất cả các thành phần hiện có trong pnDeviceChart
+            pnDeviceChart.removeAll();
+            pnDeviceChart.revalidate();
+            pnDeviceChart.repaint();
+
+            // Thêm thành phần mới vào pnDeviceChart
+            pnDeviceChart.setLayout(new BorderLayout());
+            pnDeviceChart.add(new DeviceChart("Tên", (String) cbTenTB.getSelectedItem(),"",""), BorderLayout.CENTER);
+        }
+    }//GEN-LAST:event_cbTenTBItemStateChanged
+
+    private void jRadioTenTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioTenTBActionPerformed
+        // TODO add your handling code here:
+        cbTenTB.setVisible(false);
+        tmp.setVisible(true);
+        if (endDateChooser.getDate() != null && startDateChooser.getDate() != null) {
+            if (checkDateValidity(startDateChooser.getDate(), endDateChooser.getDate())) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                pnDeviceChart.removeAll();
+                pnDeviceChart.revalidate();
+                pnDeviceChart.repaint();
+                pnDeviceChart.setLayout(new BorderLayout());
+                pnDeviceChart.add(new DeviceChart("Time", "", dateFormat.format(startDateChooser.getDate()), dateFormat.format(endDateChooser.getDate())), BorderLayout.CENTER);
+            }
+        }
+    }//GEN-LAST:event_jRadioTenTBActionPerformed
     public void loadDataTableXuLy() {
         DefaultTableModel model = (DefaultTableModel) tb_xuly.getModel();
         model.setRowCount(0);
@@ -1084,8 +1382,10 @@ public class MainForm extends javax.swing.JFrame {
         jtf.setForeground(Color.black);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btnGroupTB;
+    private javax.swing.ButtonGroup btnGroupTV;
     private javax.swing.JButton btn_addxuly;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbTenTB;
     private javax.swing.JButton jBtn_enterClassZone;
     private javax.swing.JButton jBtn_xoaThanhVien;
     private javax.swing.JButton jButton11;
@@ -1098,6 +1398,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabe_DienMaTV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel14;
@@ -1112,6 +1413,10 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_formVaoKhuHocTap;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioKhoaTV;
+    private javax.swing.JRadioButton jRadioNganhTV;
+    private javax.swing.JRadioButton jRadioTenTB;
+    private javax.swing.JRadioButton jRadioTimeTB;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1129,7 +1434,17 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_xuly;
     private javax.swing.JPanel panel_topXuLy;
     private javax.swing.JPanel panelxuly;
+    private javax.swing.JPanel pn2ndOptionTB;
+    private javax.swing.JPanel pnChartmember;
+    private javax.swing.JPanel pnDeviceChart;
+    private javax.swing.JPanel pnKhoaNganh;
+    private javax.swing.JPanel pnOptionTB;
+    private javax.swing.JPanel pnThongkeTB;
+    private javax.swing.JPanel pnThongkeTV;
+    private javax.swing.JPanel pnTimeTV;
+    private javax.swing.JPanel pnoptionmember;
     private javax.swing.JButton reload_xuly;
+    private javax.swing.JTabbedPane tabThongke;
     private javax.swing.JTable tbDangKyMuonTra;
     private javax.swing.JTable tbThanhVienMuonTra;
     private javax.swing.JTable tbThietBiMuonTra;

@@ -1,13 +1,18 @@
 GUI\MainForm$7.class
+GUI\MemberChart.class
 DAL\ThongTinSDDAL.class
 DAL\ThanhVienDAL.class
 GUI\MainForm$11.class
 DAL\ThietBiDAL.class
+GUI\MainForm$21.class
 GUI\MainForm$3.class
 GUI\MainForm.class
 GUI\FormXuLy$2.class
+GUI\DeviceChart.class
 DAL\HibernateUtil.class
 GUI\MainForm$14.class
+GUI\MainForm$24.class
+GUI\MainForm$25.class
 GUI\ThanhVienInformationForm.class
 DAL\ThanhVien.class
 GUI\MainForm$17.class
@@ -23,7 +28,9 @@ GUI\FormXuLy.class
 GUI\MainForm$16.class
 DAL\XuLy.class
 GUI\MainForm$12.class
+GUI\MainForm$22.class
 GUI\ThanhVienInformationForm$1.class
+GUI\MainForm$19.class
 BLL\ThanhVienBLL.class
 GUI\FormXuLy$4.class
 GUI\MainForm$5.class
@@ -37,5 +44,7 @@ BLL\ThongTinSDBLL.class
 DAL\XuLyDAL.class
 GUI\MainForm$4.class
 GUI\MainForm$18.class
+GUI\MainForm$23.class
+GUI\MainForm$20.class
 GUI\ThanhVienInformationForm$2.class
 GUI\FormXuLy$3.class
