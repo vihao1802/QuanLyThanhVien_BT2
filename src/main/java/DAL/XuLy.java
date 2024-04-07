@@ -1,15 +1,11 @@
 package DAL;
-
 import lombok.Data;
 import java.util.Date;
 import javax.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OptimisticLockType;
-import org.hibernate.annotations.OptimisticLocking;
 
 @Data
 @Entity
-@Table(name = "xuly") // should equal to table name in db
+@Table(name = "xuly")
 public class XuLy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
