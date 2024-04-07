@@ -4,6 +4,7 @@ DAL\ThongTinSDDAL.class
 DAL\ThanhVienDAL.class
 GUI\MainForm$11.class
 DAL\ThietBiDAL.class
+GUI\MainForm$31.class
 GUI\MainForm$21.class
 GUI\MainForm$3.class
 GUI\MainForm.class
@@ -12,6 +13,7 @@ GUI\DeviceChart.class
 DAL\HibernateUtil.class
 GUI\MainForm$14.class
 GUI\MainForm$24.class
+GUI\MainForm$34.class
 GUI\MainForm$25.class
 GUI\ThanhVienInformationForm.class
 DAL\ThanhVien.class
@@ -19,13 +21,17 @@ GUI\MainForm$17.class
 BLL\XuLyBLL.class
 GUI\FormXuLy$1.class
 GUI\MainForm$6.class
+GUI\MainForm$28.class
 GUI\MainForm$13.class
 GUI\MainForm$9.class
+GUI\MainForm$30.class
+GUI\MainForm$33.class
 BLL\ThietBiBLL.class
 GUI\MainForm$10.class
 GUI\MainForm$2.class
 GUI\FormXuLy.class
 GUI\MainForm$16.class
+GUI\MainForm$32.class
 DAL\XuLy.class
 GUI\MainForm$12.class
 GUI\MainForm$22.class
@@ -35,6 +41,7 @@ BLL\ThanhVienBLL.class
 GUI\FormXuLy$4.class
 GUI\MainForm$5.class
 DAL\ThietBi.class
+GUI\MainForm$29.class
 GUI\MainForm$8.class
 GUI\MainForm$1.class
 com\mycompany\qlthanhvien_bt2\QLThanhVien_BT2.class
