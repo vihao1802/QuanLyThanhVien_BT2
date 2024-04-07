@@ -7,6 +7,7 @@ DAL\ThietBiDAL.class
 GUI\MainForm$31.class
 GUI\MainForm$21.class
 GUI\MainForm$3.class
+GUI\MainForm$37.class
 GUI\MainForm.class
 GUI\FormXuLy$2.class
 GUI\DeviceChart.class
@@ -28,6 +29,7 @@ GUI\MainForm$30.class
 GUI\MainForm$33.class
 BLL\ThietBiBLL.class
 GUI\MainForm$10.class
+GUI\MainForm$36.class
 GUI\MainForm$2.class
 GUI\FormXuLy.class
 GUI\MainForm$16.class
@@ -47,10 +49,12 @@ GUI\MainForm$1.class
 com\mycompany\qlthanhvien_bt2\QLThanhVien_BT2.class
 DAL\ThongTinSD.class
 GUI\MainForm$15.class
+GUI\MainForm$35.class
 BLL\ThongTinSDBLL.class
 DAL\XuLyDAL.class
 GUI\MainForm$4.class
 GUI\MainForm$18.class
+GUI\MainForm$38.class
 GUI\MainForm$23.class
 GUI\MainForm$20.class
 GUI\ThanhVienInformationForm$2.class

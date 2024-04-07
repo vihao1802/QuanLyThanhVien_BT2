@@ -38,6 +38,30 @@ public class MemberChart extends JPanel {
                     "Số lượng thành viên vào",            // Nhãn trục y
                     dataset                           // Dataset
             );
+        } else if(key.equals("Ngày")) {
+            DefaultCategoryDataset dataset = createDatasetTheoNgay(time1);
+            chart = ChartFactory.createBarChart(
+                    "Số lượng thành viên theo ngày",  // Tiêu đề biểu đồ
+                    "Khung giờ",                           // Nhãn trục x
+                    "Số lượng thành viên vào",            // Nhãn trục y
+                    dataset                           // Dataset
+            );
+        } else if(key.equals("Tháng")) {
+            DefaultCategoryDataset dataset = createDatasetTheoThang(time1,time2);
+            chart = ChartFactory.createBarChart(
+                    "Số lượng thành viên theo tháng",  // Tiêu đề biểu đồ
+                    "Ngày",                           // Nhãn trục x
+                    "Số lượng thành viên vào",            // Nhãn trục y
+                    dataset                           // Dataset
+            );
+        }else if(key.equals("Năm")) {
+            DefaultCategoryDataset dataset = createDatasetTheoNam(time1);
+            chart = ChartFactory.createBarChart(
+                    "Số lượng thành viên theo năm",  // Tiêu đề biểu đồ
+                    "Tháng",                           // Nhãn trục x
+                    "Số lượng thành viên vào",            // Nhãn trục y
+                    dataset                           // Dataset
+            );
         }
         
         
@@ -47,7 +71,7 @@ public class MemberChart extends JPanel {
 
         // Thêm biểu đồ vào panel
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(360, 350));
+        chartPanel.setPreferredSize(new Dimension(500, 500));
         add(chartPanel); // Thêm ChartPanel vào MemberChart
     }
 
@@ -72,6 +96,42 @@ public class MemberChart extends JPanel {
         for(int i=0;i<listNganh.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
             System.out.println("ngành");
+        }
+        
+        return dataset;
+    }
+    
+    // Tạo dataset với dữ liệu mẫu
+    private DefaultCategoryDataset createDatasetTheoNgay(String date) {
+        ArrayList<String> listNganh = new ArrayList<>();
+        ArrayList<Integer> SL = new ThanhVienDAL().getSLTongVaoTheoNgay(listNganh, date);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(int i=0;i<listNganh.size();i++) {
+            dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
+        }
+        
+        return dataset;
+    }
+    
+    // Tạo dataset với dữ liệu mẫu
+    private DefaultCategoryDataset createDatasetTheoThang(String date, String year) {
+        ArrayList<String> listNganh = new ArrayList<>();
+        ArrayList<Integer> SL = new ThanhVienDAL().getSLTongVaoTheoThang(listNganh, date, year);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(int i=0;i<listNganh.size();i++) {
+            dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
+        }
+        
+        return dataset;
+    }
+    
+    // Tạo dataset với dữ liệu mẫu
+    private DefaultCategoryDataset createDatasetTheoNam(String date) {
+        ArrayList<String> listNganh = new ArrayList<>();
+        ArrayList<Integer> SL = new ThanhVienDAL().getSLTongVaoTheoNam(listNganh, date);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(int i=0;i<listNganh.size();i++) {
+            dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
         }
         
         return dataset;

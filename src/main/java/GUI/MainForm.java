@@ -11,6 +11,7 @@ import BLL.ThietBiBLL;
 import BLL.ThongTinSDBLL;
 import BLL.XuLyBLL;
 import DAL.ThanhVien;
+import DAL.ThanhVienDAL;
 import DAL.ThietBi;
 import DAL.ThongTinSD;
 import DAL.ThongTinSDDAL;
@@ -46,7 +47,8 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import oracle.jdbc.xa.OracleXAResource;
-
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JSpinner;
 /**
  *
  * @author ADMIN
@@ -252,9 +254,33 @@ public class MainForm extends javax.swing.JFrame {
         pnChartmember = new javax.swing.JPanel();
         pnoptionmember = new javax.swing.JPanel();
         pnTimeTV = new javax.swing.JPanel();
+        pn_menuBorrowedDevice1 = new javax.swing.JPanel();
+        btnTKTV = new javax.swing.JButton();
+        cbb_kieuTKTV = new javax.swing.JComboBox<>();
+        pnVaoTV = new javax.swing.JPanel();
+        lbTongVaoTV = new javax.swing.JLabel();
+        lbTongVaoNumTV = new javax.swing.JLabel();
+        pnRaTV = new javax.swing.JPanel();
+        pnFromDateTV = new javax.swing.JPanel();
+        lbFromdateTV = new javax.swing.JLabel();
+        SpinnerNumberModel model1 = new SpinnerNumberModel(1, 1, 31, 1);
+        spnNgayTVFrom = new javax.swing.JSpinner(model1);
+        lbFromMonthTV = new javax.swing.JLabel();
+        SpinnerNumberModel model2 = new SpinnerNumberModel(1, 1, 12, 1);
+        spnThangTVFrom = new javax.swing.JSpinner(model2);
+        lbFromYearTV = new javax.swing.JLabel();
+        jtfNamTVFrom = new javax.swing.JTextField(4);
+        pnToDateTV = new javax.swing.JPanel();
+        lbToDayTV = new javax.swing.JLabel();
+        d = new javax.swing.JSpinner();
+        lbToMonthTV = new javax.swing.JLabel();
+        m = new javax.swing.JSpinner();
+        lbToYearTV = new javax.swing.JLabel();
+        y = new javax.swing.JSpinner();
         pnKhoaNganh = new javax.swing.JPanel();
         jRadioKhoaTV = new javax.swing.JRadioButton();
         jRadioNganhTV = new javax.swing.JRadioButton();
+        jRadioTimeTV = new javax.swing.JRadioButton();
         pnThongKeTBDangMuon = new javax.swing.JPanel();
         pn_BorrowedDevice = new javax.swing.JPanel();
         pn_menuBorrowedDevice = new javax.swing.JPanel();
@@ -288,6 +314,7 @@ public class MainForm extends javax.swing.JFrame {
 
         btnGroupTV.add(jRadioKhoaTV);
         btnGroupTV.add(jRadioNganhTV);
+        btnGroupTV.add(jRadioTimeTV);
 
         btnGroupTB.add(jRadioTenTB);
         btnGroupTB.add(jRadioTimeTB);
@@ -412,7 +439,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -443,7 +470,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton3)
                     .addComponent(jRadioButton4))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
@@ -467,7 +494,7 @@ public class MainForm extends javax.swing.JFrame {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addComponent(jDateNgayMT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -536,7 +563,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
@@ -963,23 +990,154 @@ public class MainForm extends javax.swing.JFrame {
         );
         pnChartmemberLayout.setVerticalGroup(
             pnChartmemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 521, Short.MAX_VALUE)
         );
 
         pnThongkeTV.add(pnChartmember, java.awt.BorderLayout.CENTER);
 
         pnoptionmember.setLayout(new java.awt.BorderLayout());
 
+        pn_menuBorrowedDevice1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thống kê thành viên", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        pn_menuBorrowedDevice1.setPreferredSize(new java.awt.Dimension(810, 150));
+
+        btnTKTV.setBackground(new java.awt.Color(0, 204, 51));
+        btnTKTV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnTKTV.setForeground(new java.awt.Color(255, 255, 255));
+        btnTKTV.setText("Thống Kê");
+        btnTKTV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnTKTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTKTVActionPerformed(evt);
+            }
+        });
+
+        cbb_kieuTKTV.setBackground(new java.awt.Color(242, 242, 242));
+        cbb_kieuTKTV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Thống kê trong 1 ngày", "Thống kê trong 1 tháng", "Thống kê trong 1 năm", "Thống kê trong khoảng" }));
+        cbb_kieuTKTV.setBorder(javax.swing.BorderFactory.createTitledBorder("Kiểu thống kê"));
+        cbb_kieuTKTV.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbb_kieuTKTVItemStateChanged(evt);
+            }
+        });
+        cbb_kieuTKTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbb_kieuTKTVActionPerformed(evt);
+            }
+        });
+
+        lbTongVaoTV.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbTongVaoTV.setForeground(new java.awt.Color(0, 204, 51));
+        lbTongVaoTV.setText("Tổng vào:");
+        pnVaoTV.add(lbTongVaoTV);
+
+        lbTongVaoNumTV.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        pnVaoTV.add(lbTongVaoNumTV);
+
+        javax.swing.GroupLayout pnRaTVLayout = new javax.swing.GroupLayout(pnRaTV);
+        pnRaTV.setLayout(pnRaTVLayout);
+        pnRaTVLayout.setHorizontalGroup(
+            pnRaTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 113, Short.MAX_VALUE)
+        );
+        pnRaTVLayout.setVerticalGroup(
+            pnRaTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        lbFromdateTV.setText("Từ ngày");
+        pnFromDateTV.add(lbFromdateTV);
+        pnFromDateTV.add(spnNgayTVFrom);
+        JSpinner.DefaultEditor editor1 = (JSpinner.DefaultEditor) spnNgayTVFrom.getEditor();
+        JTextField textField1 = editor1.getTextField();
+        textField1.setColumns(2);
+
+        lbFromMonthTV.setText("Tháng");
+        pnFromDateTV.add(lbFromMonthTV);
+        pnFromDateTV.add(spnThangTVFrom);
+        JSpinner.DefaultEditor editor2 = (JSpinner.DefaultEditor) spnThangTVFrom.getEditor();
+        JTextField textField2 = editor2.getTextField();
+        textField2.setColumns(2);
+
+        lbFromYearTV.setText("Năm");
+        pnFromDateTV.add(lbFromYearTV);
+        pnFromDateTV.add(jtfNamTVFrom);
+
+        lbToDayTV.setText("Đến ngày");
+        pnToDateTV.add(lbToDayTV);
+        pnToDateTV.add(d);
+
+        lbToMonthTV.setText("Tháng");
+        pnToDateTV.add(lbToMonthTV);
+        pnToDateTV.add(m);
+
+        lbToYearTV.setText("Năm");
+        pnToDateTV.add(lbToYearTV);
+        pnToDateTV.add(y);
+
+        javax.swing.GroupLayout pn_menuBorrowedDevice1Layout = new javax.swing.GroupLayout(pn_menuBorrowedDevice1);
+        pn_menuBorrowedDevice1.setLayout(pn_menuBorrowedDevice1Layout);
+        pn_menuBorrowedDevice1Layout.setHorizontalGroup(
+            pn_menuBorrowedDevice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_menuBorrowedDevice1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbb_kieuTKTV, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnTKTV, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(pnVaoTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122)
+                .addComponent(pnRaTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(208, 208, 208))
+            .addGroup(pn_menuBorrowedDevice1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(pnFromDateTV, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89)
+                .addComponent(pnToDateTV, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pn_menuBorrowedDevice1Layout.setVerticalGroup(
+            pn_menuBorrowedDevice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_menuBorrowedDevice1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pn_menuBorrowedDevice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pn_menuBorrowedDevice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbb_kieuTKTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTKTV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnVaoTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnRaTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pn_menuBorrowedDevice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnFromDateTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnToDateTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+
+        cbb_kieuTK.setBackground(Color.white);
+        pnFromDateTV.setVisible(false);
+        pnToDateTV.setVisible(false);
+
         javax.swing.GroupLayout pnTimeTVLayout = new javax.swing.GroupLayout(pnTimeTV);
         pnTimeTV.setLayout(pnTimeTVLayout);
         pnTimeTVLayout.setHorizontalGroup(
             pnTimeTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 861, Short.MAX_VALUE)
+            .addGroup(pnTimeTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnTimeTVLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pn_menuBorrowedDevice1, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         pnTimeTVLayout.setVerticalGroup(
             pnTimeTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
+            .addGroup(pnTimeTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnTimeTVLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pn_menuBorrowedDevice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        pn_menuBorrowedDevice1.setVisible(false);
 
         pnoptionmember.add(pnTimeTV, java.awt.BorderLayout.CENTER);
 
@@ -998,6 +1156,14 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         pnKhoaNganh.add(jRadioNganhTV);
+
+        jRadioTimeTV.setText("Thời gian");
+        jRadioTimeTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioTimeTVActionPerformed(evt);
+            }
+        });
+        pnKhoaNganh.add(jRadioTimeTV);
 
         pnoptionmember.add(pnKhoaNganh, java.awt.BorderLayout.PAGE_START);
 
@@ -1690,6 +1856,87 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jRadioTenTBActionPerformed
 
+    private void btnTKTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKTVActionPerformed
+        // TODO add your handling code here:
+        String key = (String) cbb_kieuTKTV.getSelectedItem();
+        if (key.equals("Tất cả")) {
+            int slTongVao = new ThanhVienDAL().getSLTongVao();
+            lbTongVaoNumTV.setText(String.valueOf(slTongVao));
+        } else if (key.equals("Thống kê trong 1 ngày")) {
+            int day = (int) spnNgayTVFrom.getValue();
+            String month = String.valueOf(spnThangTVFrom.getValue()) ;
+            int year = Integer.parseInt(jtfNamTVFrom.getText());
+            String formattedDay = String.format("%02d", day);
+            String dateString = year + "-" + month + "-" + formattedDay;
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date date = sdf.parse(dateString);
+                pnChartmember.removeAll();
+                pnChartmember.revalidate();
+                pnChartmember.repaint();
+                pnChartmember.setLayout(new BorderLayout());
+                pnChartmember.add(new MemberChart("Ngày",sdf.format(date),""),BorderLayout.CENTER);
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+            }
+            lbTongVaoNumTV.setText(String.valueOf(thanhvienBLL.getSLTongVaoTheoNgayNum(new ArrayList<>(), month)));
+        } else if (key.equals("Thống kê trong 1 tháng")) {
+            String month = String.valueOf(spnThangTVFrom.getValue()) ;
+            pnChartmember.removeAll();
+            pnChartmember.revalidate();
+            pnChartmember.repaint();
+            pnChartmember.setLayout(new BorderLayout());
+            pnChartmember.add(new MemberChart("Tháng",month,jtfNamTVFrom.getText()),BorderLayout.CENTER);
+            lbTongVaoNumTV.setText(String.valueOf(thanhvienBLL.getSLTongVaoTheoThangNum(new ArrayList<>(), month, jtfNamTVFrom.getText())));
+        } else if (key.equals("Thống kê trong 1 năm")) {
+            pnChartmember.removeAll();
+            pnChartmember.revalidate();
+            pnChartmember.repaint();
+            pnChartmember.setLayout(new BorderLayout());
+            pnChartmember.add(new MemberChart("Năm",jtfNamTVFrom.getText(),""),BorderLayout.CENTER);
+            lbTongVaoNumTV.setText(String.valueOf(thanhvienBLL.getSLTongVaoTheoNamNum(new ArrayList<>(),jtfNamTVFrom.getText())));
+        }
+
+    }//GEN-LAST:event_btnTKTVActionPerformed
+
+    private void cbb_kieuTKTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_kieuTKTVActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cbb_kieuTKTVActionPerformed
+
+    private void jRadioTimeTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioTimeTVActionPerformed
+        // TODO add your handling code here:
+        pn_menuBorrowedDevice1.setVisible(true);
+        pnChartmember.removeAll();
+        pnChartmember.revalidate();
+        pnChartmember.repaint();
+    }//GEN-LAST:event_jRadioTimeTVActionPerformed
+
+    private void cbb_kieuTKTVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_kieuTKTVItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+        // Lấy giá trị của mục đã chọn từ JComboBox
+        String selected = (String) cbb_kieuTKTV.getSelectedItem();
+        
+        // Kiểm tra xem selected có null không để tránh NullPointerException
+        if (selected != null) {
+            if (selected.equals("Tất cả")) {
+                pnFromDateTV.setVisible(false);
+            } else if (selected.equals("Thống kê trong 1 ngày")) {
+                pnFromDateTV.setVisible(true);
+                spnNgayTVFrom.setEnabled(true);
+                spnThangTVFrom.setEnabled(true);
+            } else if (selected.equals("Thống kê trong 1 tháng")) {
+                pnFromDateTV.setVisible(true);
+                spnNgayTVFrom.setEnabled(false);
+            } else if (selected.equals("Thống kê trong 1 năm")) {
+                pnFromDateTV.setVisible(true);
+                spnNgayTVFrom.setEnabled(false);
+                spnThangTVFrom.setEnabled(false);
+            }
+        }
+    }
+    }//GEN-LAST:event_cbb_kieuTKTVItemStateChanged
+
     public void loadDataTableXuLy() {
         DefaultTableModel model = (DefaultTableModel) tb_xuly.getModel();
         model.setRowCount(0);
@@ -1806,11 +2053,14 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btnGroupTB;
     private javax.swing.ButtonGroup btnGroupTV;
+    private javax.swing.JButton btnTKTV;
     private javax.swing.JButton btn_addxuly;
     private javax.swing.JComboBox<String> cbTenTB;
     private javax.swing.JComboBox<String> cbbMonth;
     private javax.swing.JComboBox<String> cbbMonth1;
     private javax.swing.JComboBox<String> cbb_kieuTK;
+    private javax.swing.JComboBox<String> cbb_kieuTKTV;
+    private javax.swing.JSpinner d;
     private javax.swing.JButton jBtn_enterClassZone;
     private javax.swing.JButton jBtn_xoaThanhVien;
     private javax.swing.JButton jButton11;
@@ -1849,6 +2099,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioNganhTV;
     private javax.swing.JRadioButton jRadioTenTB;
     private javax.swing.JRadioButton jRadioTimeTB;
+    private javax.swing.JRadioButton jRadioTimeTV;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1863,26 +2114,43 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton jbtBorrowedDevice;
     private javax.swing.JScrollPane jsp_mainXuLy;
     private javax.swing.JScrollPane jsp_mainXuLy2;
+    private javax.swing.JTextField jtfNamTVFrom;
     private javax.swing.JTextField jtfYear;
     private javax.swing.JTextField jtfYear1;
     private javax.swing.JTextField jtf_maThanhVien;
     private javax.swing.JTextField jtf_searchInQLTV;
     private javax.swing.JTextField jtf_xuly;
+    private javax.swing.JLabel lbFromMonthTV;
+    private javax.swing.JLabel lbFromYearTV;
+    private javax.swing.JLabel lbFromdateTV;
+    private javax.swing.JLabel lbToDayTV;
+    private javax.swing.JLabel lbToMonthTV;
+    private javax.swing.JLabel lbToYearTV;
+    private javax.swing.JLabel lbTongVaoNumTV;
+    private javax.swing.JLabel lbTongVaoTV;
+    private javax.swing.JSpinner m;
     private javax.swing.JPanel panel_topXuLy;
     private javax.swing.JPanel panelxuly;
     private javax.swing.JPanel pn2ndOptionTB;
     private javax.swing.JPanel pnChartmember;
     private javax.swing.JPanel pnDeviceChart;
+    private javax.swing.JPanel pnFromDateTV;
     private javax.swing.JPanel pnKhoaNganh;
     private javax.swing.JPanel pnOptionTB;
+    private javax.swing.JPanel pnRaTV;
     private javax.swing.JPanel pnThongKeTBDangMuon;
     private javax.swing.JPanel pnThongkeTB;
     private javax.swing.JPanel pnThongkeTV;
     private javax.swing.JPanel pnTimeTV;
+    private javax.swing.JPanel pnToDateTV;
+    private javax.swing.JPanel pnVaoTV;
     private javax.swing.JPanel pn_BorrowedDevice;
     private javax.swing.JPanel pn_menuBorrowedDevice;
+    private javax.swing.JPanel pn_menuBorrowedDevice1;
     private javax.swing.JPanel pnoptionmember;
     private javax.swing.JButton reload_xuly;
+    private javax.swing.JSpinner spnNgayTVFrom;
+    private javax.swing.JSpinner spnThangTVFrom;
     private javax.swing.JSpinner spn_day;
     private javax.swing.JSpinner spn_day1;
     private javax.swing.JTabbedPane tabThongke;
@@ -1891,5 +2159,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTable tbThietBiMuonTra;
     private javax.swing.JTable tb_BorrowedDevice;
     private javax.swing.JTable tb_xuly;
+    private javax.swing.JSpinner y;
     // End of variables declaration//GEN-END:variables
 }
