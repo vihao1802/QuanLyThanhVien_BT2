@@ -73,7 +73,7 @@ public class MainForm extends javax.swing.JFrame {
         thietbiBLL = new ThietBiBLL();
         xlBLL = new XuLyBLL();
         loadTimeOption();
-        
+        loadDataInToTableThietBi();
     }
     
     public void loadTimeOption() {
@@ -227,6 +227,13 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbl_qlThanhVien = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jBtn_xoaThanhVien1 = new javax.swing.JButton();
+        jtf_searchInQLTB = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tb_Thietbi = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         panelxuly = new javax.swing.JPanel();
         panel_topXuLy = new javax.swing.JPanel();
@@ -439,7 +446,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -470,7 +477,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton3)
                     .addComponent(jRadioButton4))
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
@@ -494,7 +501,7 @@ public class MainForm extends javax.swing.JFrame {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addComponent(jDateNgayMT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -563,7 +570,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
@@ -777,15 +784,118 @@ public class MainForm extends javax.swing.JFrame {
 
         jTabbedPane_QLTV.addTab("Quản lý thành viên", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-member-30.png")), jPanel2, "Quản lý thành viên"); // NOI18N
 
+        jButton6.setBackground(new java.awt.Color(0, 255, 51));
+        jButton6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("Thêm");
+        jButton6.setToolTipText("");
+
+        jButton9.setBackground(new java.awt.Color(0, 255, 204));
+        jButton9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(255, 255, 255));
+        jButton9.setText("Sửa");
+        jButton9.setToolTipText("");
+
+        jBtn_xoaThanhVien1.setBackground(new java.awt.Color(255, 51, 51));
+        jBtn_xoaThanhVien1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jBtn_xoaThanhVien1.setForeground(new java.awt.Color(255, 255, 255));
+        jBtn_xoaThanhVien1.setText("Xóa");
+        jBtn_xoaThanhVien1.setToolTipText("");
+        jBtn_xoaThanhVien1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtn_xoaThanhVien1ActionPerformed(evt);
+            }
+        });
+
+        jtf_searchInQLTB.setText("Search by ID/name");
+        jtf_searchInQLTB.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_searchInQLTBFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_searchInQLTBFocusLost(evt);
+            }
+        });
+        jtf_searchInQLTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_searchInQLTBActionPerformed(evt);
+            }
+        });
+
+        tb_Thietbi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Mã thiết bị", "Tên thiết bị", "Mô tả thiết bị"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tb_Thietbi);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jtf_searchInQLTB, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtn_xoaThanhVien1)
+                        .addGap(61, 61, 61)))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtn_xoaThanhVien1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_searchInQLTB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 861, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 737, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jTabbedPane_QLTV.addTab("Quản lý thiết bị", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-device-manager-30.png")), jPanel3, "Quản lý thiết bị"); // NOI18N
@@ -1937,6 +2047,47 @@ public class MainForm extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_cbb_kieuTKTVItemStateChanged
 
+    private void jtf_searchInQLTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_searchInQLTBActionPerformed
+        String input = jtf_searchInQLTB.getText().toLowerCase().trim();
+        DefaultTableModel model = (DefaultTableModel) tb_Thietbi.getModel();
+        model.setRowCount(0);
+        List<ThietBi> list = this.thietbiBLL.loadThietBi();
+        Object[] row;
+        for(ThietBi tb : list) {
+            String matb = tb.getMaTB() + "";
+            String tentb = tb.getTenTB();
+            String motatb = tb.getMoTaTB();
+            if(matb.toLowerCase().contains(input)
+                    || tentb.toLowerCase().contains(input)
+                    || motatb.toLowerCase().contains(input)) {
+                row = new Object[3];
+                row[0] = tb.getMaTB();
+                row[1] = tb.getTenTB();
+                row[2] = tb.getMoTaTB();
+                model.addRow(row);
+            }
+        }
+    }//GEN-LAST:event_jtf_searchInQLTBActionPerformed
+
+    private void jtf_searchInQLTBFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_searchInQLTBFocusLost
+        if (jtf_searchInQLTB.getText().length() == 0) {
+            addPlaceHolderStyle(jtf_searchInQLTB);
+            jtf_searchInQLTB.setText("Search by ID/name");
+        }
+    }//GEN-LAST:event_jtf_searchInQLTBFocusLost
+
+    private void jtf_searchInQLTBFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_searchInQLTBFocusGained
+         if (jtf_searchInQLTB.getText().equals("Search by ID/name")) {
+            jtf_searchInQLTB.setText(null);
+            jtf_searchInQLTB.requestFocus();
+            System.out.println("");
+        }
+    }//GEN-LAST:event_jtf_searchInQLTBFocusGained
+
+    private void jBtn_xoaThanhVien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtn_xoaThanhVien1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtn_xoaThanhVien1ActionPerformed
+
     public void loadDataTableXuLy() {
         DefaultTableModel model = (DefaultTableModel) tb_xuly.getModel();
         model.setRowCount(0);
@@ -1981,6 +2132,7 @@ public class MainForm extends javax.swing.JFrame {
         tablexuly.getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
         tablexuly.setRowHeight(25);
     }
+    
     public void loadDataTableThietBiMuon() {
         DefaultTableModel model = (DefaultTableModel) tb_BorrowedDevice.getModel();
         model.setRowCount(0);
@@ -2002,6 +2154,22 @@ public class MainForm extends javax.swing.JFrame {
         tb_BorrowedDevice.setRowHeight(25);
                                                    
     }
+    
+    public void loadDataInToTableThietBi(){
+        String[] col = new String[] { "Mã thiết bị", "Tên thiết bị", "Mô tả thiết bị"};
+        DefaultTableModel model = new DefaultTableModel(col,0);
+        List<ThietBi> list = this.thietbiBLL.loadThietBi();
+        Object[] row;
+        for(ThietBi tb : list) {
+             row = new Object[3];
+             row[0] = tb.getMaTB();
+             row[1] = tb.getTenTB();
+             row[2] = tb.getMoTaTB();
+             model.addRow(row);
+        }
+        this.tb_Thietbi.setModel(model);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -2063,12 +2231,15 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JSpinner d;
     private javax.swing.JButton jBtn_enterClassZone;
     private javax.swing.JButton jBtn_xoaThanhVien;
+    private javax.swing.JButton jBtn_xoaThanhVien1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private com.toedter.calendar.JDateChooser jDateNgayMT;
     private javax.swing.JLabel jLabe_DienMaTV;
     private javax.swing.JLabel jLabel1;
@@ -2091,6 +2262,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanel_formVaoKhuHocTap;
     private javax.swing.JRadioButton jRadioButton3;
@@ -2105,6 +2277,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane_QLTV;
     private javax.swing.JTable jTable11;
@@ -2118,6 +2291,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtfYear;
     private javax.swing.JTextField jtfYear1;
     private javax.swing.JTextField jtf_maThanhVien;
+    private javax.swing.JTextField jtf_searchInQLTB;
     private javax.swing.JTextField jtf_searchInQLTV;
     private javax.swing.JTextField jtf_xuly;
     private javax.swing.JLabel lbFromMonthTV;
@@ -2158,6 +2332,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTable tbThanhVienMuonTra;
     private javax.swing.JTable tbThietBiMuonTra;
     private javax.swing.JTable tb_BorrowedDevice;
+    private javax.swing.JTable tb_Thietbi;
     private javax.swing.JTable tb_xuly;
     private javax.swing.JSpinner y;
     // End of variables declaration//GEN-END:variables
