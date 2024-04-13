@@ -42,6 +42,10 @@ public class ThanhVienBLL {
         return thanhvienDAL.getSLTongVaoTheoNgay(gioList,date);
     }
     
+    public ArrayList<Integer> getSLTongVaoTheoKhoang(ArrayList<String> gioList, String date1, String date2) {
+        return thanhvienDAL.getSLTongVaoTheoKhoang(gioList,date1, date2);
+    }
+    
     public int getSLTongVaoTheoNgayNum(ArrayList<String> gioList, String date) {
         int total = 0;
         for (Integer tmp : thanhvienDAL.getSLTongVaoTheoNgay(gioList,date)) {
@@ -80,5 +84,13 @@ public class ThanhVienBLL {
             total += tmp;
         }
         return total;
+    }
+    
+    public ArrayList<Integer> getSLThanhVienTheoKhoa(ArrayList<String> khoaList) {
+        return thanhvienDAL.getSLThanhVienTheoKhoa(khoaList);
+    }
+
+    public ArrayList<Integer> getSLThanhVienTheoNganh(ArrayList<String> nganhList) {
+        return thanhvienDAL.getSLThanhVienTheoNganh(nganhList);
     }
 }

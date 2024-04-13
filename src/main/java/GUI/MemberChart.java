@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import DAL.ThanhVienDAL;
+import BLL.ThanhVienBLL;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -86,7 +86,7 @@ public class MemberChart extends JPanel {
     // Tạo dataset với dữ liệu mẫu
     private DefaultCategoryDataset createDatasetKhoa() {
         ArrayList<String> listKhoa = new ArrayList<>();
-        ArrayList<Integer> SL = new ThanhVienDAL().getSLThanhVienTheoKhoa(listKhoa);
+        ArrayList<Integer> SL = new ThanhVienBLL().getSLThanhVienTheoKhoa(listKhoa);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<listKhoa.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listKhoa.get(i));
@@ -99,7 +99,7 @@ public class MemberChart extends JPanel {
     // Tạo dataset với dữ liệu mẫu
     private DefaultCategoryDataset createDatasetNganh() {
         ArrayList<String> listNganh = new ArrayList<>();
-        ArrayList<Integer> SL = new ThanhVienDAL().getSLThanhVienTheoNganh(listNganh);
+        ArrayList<Integer> SL = new ThanhVienBLL().getSLThanhVienTheoNganh(listNganh);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<listNganh.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
@@ -112,7 +112,7 @@ public class MemberChart extends JPanel {
     // Tạo dataset với dữ liệu mẫu
     private DefaultCategoryDataset createDatasetTheoNgay(String date) {
         ArrayList<String> listNganh = new ArrayList<>();
-        ArrayList<Integer> SL = new ThanhVienDAL().getSLTongVaoTheoNgay(listNganh, date);
+        ArrayList<Integer> SL = new ThanhVienBLL().getSLTongVaoTheoNgay(listNganh, date);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<listNganh.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
@@ -124,7 +124,7 @@ public class MemberChart extends JPanel {
     // Tạo dataset với dữ liệu mẫu
     private DefaultCategoryDataset createDatasetTheoKhoang(String date1, String date2) {
         ArrayList<String> listNganh = new ArrayList<>();
-        ArrayList<Integer> SL = new ThanhVienDAL().getSLTongVaoTheoKhoang(listNganh, date1, date2);
+        ArrayList<Integer> SL = new ThanhVienBLL().getSLTongVaoTheoKhoang(listNganh, date1, date2);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<listNganh.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
@@ -136,7 +136,7 @@ public class MemberChart extends JPanel {
     // Tạo dataset với dữ liệu mẫu
     private DefaultCategoryDataset createDatasetTheoThang(String date, String year) {
         ArrayList<String> listNganh = new ArrayList<>();
-        ArrayList<Integer> SL = new ThanhVienDAL().getSLTongVaoTheoThang(listNganh, date, year);
+        ArrayList<Integer> SL = new ThanhVienBLL().getSLTongVaoTheoThang(listNganh, date, year);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<listNganh.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
@@ -148,7 +148,7 @@ public class MemberChart extends JPanel {
     // Tạo dataset với dữ liệu mẫu
     private DefaultCategoryDataset createDatasetTheoNam(String date) {
         ArrayList<String> listNganh = new ArrayList<>();
-        ArrayList<Integer> SL = new ThanhVienDAL().getSLTongVaoTheoNam(listNganh, date);
+        ArrayList<Integer> SL = new ThanhVienBLL().getSLTongVaoTheoNam(listNganh, date);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<listNganh.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
