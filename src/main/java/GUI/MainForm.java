@@ -318,6 +318,7 @@ public class MainForm extends javax.swing.JFrame {
                 return false;
             }
         };
+        pnChartstatus = new javax.swing.JPanel();
 
         btnGroupTV.add(jRadioKhoaTV);
         btnGroupTV.add(jRadioNganhTV);
@@ -1029,6 +1030,11 @@ public class MainForm extends javax.swing.JFrame {
         jPanel5.setLayout(new java.awt.BorderLayout());
 
         tabThongke.setBackground(new java.awt.Color(255, 255, 255));
+        tabThongke.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabThongkeStateChanged(evt);
+            }
+        });
         tabThongke.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabThongkeMouseClicked(evt);
@@ -1484,7 +1490,22 @@ public class MainForm extends javax.swing.JFrame {
 
         tabThongke.addTab("Thiết bị đang được mượn", pnThongKeTBDangMuon);
 
-        jPanel5.add(tabThongke, java.awt.BorderLayout.CENTER);
+        pnChartstatus.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnChartstatusLayout = new javax.swing.GroupLayout(pnChartstatus);
+        pnChartstatus.setLayout(pnChartstatusLayout);
+        pnChartstatusLayout.setHorizontalGroup(
+            pnChartstatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 861, Short.MAX_VALUE)
+        );
+        pnChartstatusLayout.setVerticalGroup(
+            pnChartstatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 702, Short.MAX_VALUE)
+        );
+
+        tabThongke.addTab("Tình trạng xử lý", pnChartstatus);
+
+        jPanel5.add(tabThongke, java.awt.BorderLayout.PAGE_START);
 
         jTabbedPane_QLTV.addTab("Thống kê", new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-statistic-30.png")), jPanel5, "Thống kê"); // NOI18N
 
@@ -2088,6 +2109,20 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtn_xoaThanhVien1ActionPerformed
 
+    private void tabThongkeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabThongkeStateChanged
+        int selectedIndex = tabThongke.getSelectedIndex();
+
+    // Xử lý sự kiện
+        if (selectedIndex==3){
+            
+            pnChartstatus.removeAll();
+            pnChartstatus.revalidate();
+            pnChartstatus.repaint();
+            pnChartstatus.setLayout(new BorderLayout());
+            pnChartstatus.add(new StatusChart(),BorderLayout.CENTER);
+        }
+    }//GEN-LAST:event_tabThongkeStateChanged
+
     public void loadDataTableXuLy() {
         DefaultTableModel model = (DefaultTableModel) tb_xuly.getModel();
         model.setRowCount(0);
@@ -2307,6 +2342,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel panelxuly;
     private javax.swing.JPanel pn2ndOptionTB;
     private javax.swing.JPanel pnChartmember;
+    private javax.swing.JPanel pnChartstatus;
     private javax.swing.JPanel pnDeviceChart;
     private javax.swing.JPanel pnFromDateTV;
     private javax.swing.JPanel pnKhoaNganh;

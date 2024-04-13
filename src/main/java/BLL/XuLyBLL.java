@@ -44,6 +44,9 @@ public class XuLyBLL {
     public void updateXuLy(XuLy obj) {
         XuLyDAL.update(obj);
     }
+    public long getTongSoTien() {
+        return XuLyDAL.getTongSoTien();
+    }
     public boolean isNullOrEmpty(String str) {
         return str == null || str.trim().isEmpty();
     }
