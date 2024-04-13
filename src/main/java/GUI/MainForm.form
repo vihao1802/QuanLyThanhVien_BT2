@@ -219,18 +219,18 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel12" pref="861" max="32767" attributes="0"/>
+                          <Component id="jPanel12" pref="865" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanel14" min="-2" pref="400" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jPanel19" pref="449" max="32767" attributes="0"/>
+                              <Component id="jPanel19" pref="453" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jButton7" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jPanel16" alignment="0" pref="861" max="32767" attributes="0"/>
+                          <Component id="jPanel16" alignment="0" pref="865" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -282,7 +282,7 @@
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jScrollPane10" pref="218" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane10" pref="220" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -354,7 +354,7 @@
                                       <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -409,7 +409,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jDateNgayMT" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -475,7 +475,7 @@
                                   <Component id="jButton8" min="-2" pref="36" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButton3" min="-2" pref="36" max="-2" attributes="0"/>
-                                  <EmptySpace pref="101" max="32767" attributes="0"/>
+                                  <EmptySpace pref="103" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1438,8 +1438,8 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                           <Component id="pnFromDateTV" min="-2" pref="344" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                                          <Component id="pnToDateTV" min="-2" pref="351" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                          <Component id="pnFromDateTV1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -1459,7 +1459,7 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="pnFromDateTV" min="-2" max="-2" attributes="0"/>
-                                              <Component id="pnToDateTV" min="-2" max="-2" attributes="0"/>
+                                              <Component id="pnFromDateTV1" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace pref="50" max="32767" attributes="0"/>
                                       </Group>
@@ -1600,33 +1600,46 @@
                                     </Component>
                                   </SubComponents>
                                 </Container>
-                                <Container class="javax.swing.JPanel" name="pnToDateTV">
+                                <Container class="javax.swing.JPanel" name="pnFromDateTV1">
                                   <AuxValues>
-                                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="pnToDateTV.setVisible(false);"/>
+                                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="pnFromDateTV1.setVisible(false);"/>
                                   </AuxValues>
 
                                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                                   <SubComponents>
-                                    <Component class="javax.swing.JLabel" name="lbToDayTV">
+                                    <Component class="javax.swing.JLabel" name="lbFromdateTV1">
                                       <Properties>
                                         <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n ng&#xe0;y"/>
                                       </Properties>
                                     </Component>
-                                    <Component class="javax.swing.JSpinner" name="d">
+                                    <Component class="javax.swing.JSpinner" name="spnNgayTVFrom1">
+                                      <AuxValues>
+                                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JSpinner.DefaultEditor editor11 = (JSpinner.DefaultEditor) spnNgayTVFrom1.getEditor();&#xa;JTextField textField11 = editor11.getTextField();&#xa;textField11.setColumns(2);"/>
+                                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(model11)"/>
+                                        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="SpinnerNumberModel model11 = new SpinnerNumberModel(1, 1, 31, 1);"/>
+                                      </AuxValues>
                                     </Component>
-                                    <Component class="javax.swing.JLabel" name="lbToMonthTV">
+                                    <Component class="javax.swing.JLabel" name="lbFromMonthTV1">
                                       <Properties>
                                         <Property name="text" type="java.lang.String" value="Th&#xe1;ng"/>
                                       </Properties>
                                     </Component>
-                                    <Component class="javax.swing.JSpinner" name="m">
+                                    <Component class="javax.swing.JSpinner" name="spnThangTVFrom1">
+                                      <AuxValues>
+                                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JSpinner.DefaultEditor editor22 = (JSpinner.DefaultEditor) spnThangTVFrom1.getEditor();&#xa;JTextField textField22 = editor22.getTextField();&#xa;textField22.setColumns(2);"/>
+                                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(model22)"/>
+                                        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="SpinnerNumberModel model22 = new SpinnerNumberModel(1, 1, 12, 1);"/>
+                                      </AuxValues>
                                     </Component>
-                                    <Component class="javax.swing.JLabel" name="lbToYearTV">
+                                    <Component class="javax.swing.JLabel" name="lbFromYearTV1">
                                       <Properties>
                                         <Property name="text" type="java.lang.String" value="N&#x103;m"/>
                                       </Properties>
                                     </Component>
-                                    <Component class="javax.swing.JSpinner" name="y">
+                                    <Component class="javax.swing.JTextField" name="jtfNamTVFrom1">
+                                      <AuxValues>
+                                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(4)"/>
+                                      </AuxValues>
                                     </Component>
                                   </SubComponents>
                                 </Container>

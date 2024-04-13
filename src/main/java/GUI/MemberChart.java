@@ -62,6 +62,14 @@ public class MemberChart extends JPanel {
                     "Số lượng thành viên vào",            // Nhãn trục y
                     dataset                           // Dataset
             );
+        } else if(key.equals("Khoảng")) {
+            DefaultCategoryDataset dataset = createDatasetTheoKhoang(time1, time2);
+            chart = ChartFactory.createBarChart(
+                    "Số lượng thành viên theo khoảng ngày",  // Tiêu đề biểu đồ
+                    "Giờ",                           // Nhãn trục x
+                    "Số lượng thành viên vào",            // Nhãn trục y
+                    dataset                           // Dataset
+            );
         }
         
         
@@ -105,6 +113,18 @@ public class MemberChart extends JPanel {
     private DefaultCategoryDataset createDatasetTheoNgay(String date) {
         ArrayList<String> listNganh = new ArrayList<>();
         ArrayList<Integer> SL = new ThanhVienDAL().getSLTongVaoTheoNgay(listNganh, date);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(int i=0;i<listNganh.size();i++) {
+            dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
+        }
+        
+        return dataset;
+    }
+    
+    // Tạo dataset với dữ liệu mẫu
+    private DefaultCategoryDataset createDatasetTheoKhoang(String date1, String date2) {
+        ArrayList<String> listNganh = new ArrayList<>();
+        ArrayList<Integer> SL = new ThanhVienDAL().getSLTongVaoTheoKhoang(listNganh, date1, date2);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<listNganh.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
