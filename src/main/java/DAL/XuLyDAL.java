@@ -41,7 +41,18 @@ public class XuLyDAL {
         }
         return list;
     }
-
+    public long getTongSoTien() {
+        long TongSoTien = 0;
+        try {
+            beginTransaction();
+            Query<Long> query = session.createQuery("SELECT COALESCE(SUM(x.SoTien), 0) FROM XuLy x WHERE x.TrangThaiXL = 0", Long.class);
+            TongSoTien = query.uniqueResult();
+            commitTransaction();
+        } catch (Exception ex) {
+            handleException("Error retrieving total fine amount", ex);
+        }
+        return TongSoTien;
+    }
     public XuLy getXuLyThanhVienDangViPham(int MaTV) {
         XuLy xl = null;
         try {
