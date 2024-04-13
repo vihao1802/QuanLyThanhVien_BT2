@@ -4,8 +4,7 @@
  */
 package GUI;
 
-import DAL.ThanhVienDAL;
-import DAL.ThietBiDAL;
+import BLL.ThietBiBLL;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -60,14 +59,14 @@ public class DeviceChart extends JPanel {
     // Tạo dataset với dữ liệu mẫu
     private DefaultCategoryDataset createDatasetTenTB(String tenTB) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(new ThietBiDAL().getSLThietBiTheoTen(tenTB), "Số lượng", tenTB);
+        dataset.addValue(new ThietBiBLL().getSLThietBiTheoTen(tenTB), "Số lượng", tenTB);
         return dataset;
     }
     
     // Tạo dataset với dữ liệu mẫu
     private DefaultCategoryDataset createDatasetTime(String time1, String time2) {
         ArrayList<String> listNganh = new ArrayList<>();
-        ArrayList<Integer> SL = new ThietBiDAL().getTBTheoThoiGian(listNganh,time1,time2);
+        ArrayList<Integer> SL = new ThietBiBLL().getTBTheoThoiGian(listNganh,time1,time2);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<listNganh.size();i++) {
             dataset.addValue(SL.get(i), "Số lượng", listNganh.get(i));
