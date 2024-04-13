@@ -150,6 +150,40 @@ public class ThanhVienDAL {
 
         return soLuongList;
     }
+   
+    public ArrayList<Integer> getSLTongVaoTheoKhoang(ArrayList<String> gioList, String startDate, String endDate) {
+        ArrayList<Integer> soLuongList = new ArrayList<>();
+        String query = "SELECT\n"
+                + "    DATE(TGVao) AS Ngay,\n"
+                + "    CONCAT(HOUR(TGVao), 'h-', HOUR(TGVao) + 1, 'h') AS HourRange,\n"
+                + "    COUNT(*) AS Count\n"
+                + "FROM\n"
+                + "    ThongTinSD\n"
+                + "WHERE\n"
+                + "    TGVao IS NOT NULL AND\n"
+                + "    DATE(TGVao) BETWEEN '" + startDate + "' AND '" + endDate + "'\n"
+                + "GROUP BY\n"
+                + "HOUR(TGVao)";
+
+        session.beginTransaction();
+
+        // Thực hiện truy vấn SQL
+        Query<Object[]> queryResult = session.createQuery(query, Object[].class);
+        List<Object[]> results = queryResult.list();
+
+        // Duyệt qua kết quả và gán tên ngành và số lượng vào ArrayList
+        for (Object[] result : results) {
+            String khoa = (String) result[1];
+            Integer soLuong = ((Number) result[2]).intValue();
+            gioList.add(khoa);
+            soLuongList.add(soLuong);
+        }
+
+        session.getTransaction().commit();
+
+        return soLuongList;
+    }
+
 
     public ArrayList<Integer> getSLTongVaoTheoThang(ArrayList<String> gioList, String date, String year) {
         ArrayList<Integer> soLuongList = new ArrayList<>();

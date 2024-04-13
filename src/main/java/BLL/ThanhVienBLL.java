@@ -49,6 +49,14 @@ public class ThanhVienBLL {
         }
         return total;
     }
+    
+    public int getSLTongVaoTheoKhoangNum(ArrayList<String> gioList, String date1, String date2) {
+        int total = 0;
+        for (Integer tmp : thanhvienDAL.getSLTongVaoTheoKhoang(gioList,date1, date2)) {
+            total += tmp;
+        }
+        return total;
+    }
 
     public ArrayList<Integer> getSLTongVaoTheoThang(ArrayList<String> gioList, String date, String year) {
         return thanhvienDAL.getSLTongVaoTheoThang(gioList,date,year);

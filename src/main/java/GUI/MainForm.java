@@ -77,7 +77,12 @@ public class MainForm extends javax.swing.JFrame {
     }
     
     public void loadTimeOption() {
-        
+        jRadioKhoaTV.setSelected(true);
+        pnChartmember.removeAll();
+        pnChartmember.revalidate();
+        pnChartmember.repaint();
+        pnChartmember.setLayout(new BorderLayout());
+        pnChartmember.add(new MemberChart("Khoa","",""),BorderLayout.CENTER);
         startDateChooser.setDateFormatString("yyyy-MM-dd");
         startDateChooser.setPreferredSize(new Dimension(150, 30));
 
@@ -277,13 +282,15 @@ public class MainForm extends javax.swing.JFrame {
         spnThangTVFrom = new javax.swing.JSpinner(model2);
         lbFromYearTV = new javax.swing.JLabel();
         jtfNamTVFrom = new javax.swing.JTextField(4);
-        pnToDateTV = new javax.swing.JPanel();
-        lbToDayTV = new javax.swing.JLabel();
-        d = new javax.swing.JSpinner();
-        lbToMonthTV = new javax.swing.JLabel();
-        m = new javax.swing.JSpinner();
-        lbToYearTV = new javax.swing.JLabel();
-        y = new javax.swing.JSpinner();
+        pnFromDateTV1 = new javax.swing.JPanel();
+        lbFromdateTV1 = new javax.swing.JLabel();
+        SpinnerNumberModel model11 = new SpinnerNumberModel(1, 1, 31, 1);
+        spnNgayTVFrom1 = new javax.swing.JSpinner(model11);
+        lbFromMonthTV1 = new javax.swing.JLabel();
+        SpinnerNumberModel model22 = new SpinnerNumberModel(1, 1, 12, 1);
+        spnThangTVFrom1 = new javax.swing.JSpinner(model22);
+        lbFromYearTV1 = new javax.swing.JLabel();
+        jtfNamTVFrom1 = new javax.swing.JTextField(4);
         pnKhoaNganh = new javax.swing.JPanel();
         jRadioKhoaTV = new javax.swing.JRadioButton();
         jRadioNganhTV = new javax.swing.JRadioButton();
@@ -447,7 +454,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -478,7 +485,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton3)
                     .addComponent(jRadioButton4))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
@@ -502,7 +509,7 @@ public class MainForm extends javax.swing.JFrame {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addComponent(jDateNgayMT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -571,7 +578,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
@@ -595,16 +602,16 @@ public class MainForm extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
+                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
+            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1178,17 +1185,23 @@ public class MainForm extends javax.swing.JFrame {
         pnFromDateTV.add(lbFromYearTV);
         pnFromDateTV.add(jtfNamTVFrom);
 
-        lbToDayTV.setText("Đến ngày");
-        pnToDateTV.add(lbToDayTV);
-        pnToDateTV.add(d);
+        lbFromdateTV1.setText("Đến ngày");
+        pnFromDateTV1.add(lbFromdateTV1);
+        pnFromDateTV1.add(spnNgayTVFrom1);
+        JSpinner.DefaultEditor editor11 = (JSpinner.DefaultEditor) spnNgayTVFrom1.getEditor();
+        JTextField textField11 = editor11.getTextField();
+        textField11.setColumns(2);
 
-        lbToMonthTV.setText("Tháng");
-        pnToDateTV.add(lbToMonthTV);
-        pnToDateTV.add(m);
+        lbFromMonthTV1.setText("Tháng");
+        pnFromDateTV1.add(lbFromMonthTV1);
+        pnFromDateTV1.add(spnThangTVFrom1);
+        JSpinner.DefaultEditor editor22 = (JSpinner.DefaultEditor) spnThangTVFrom1.getEditor();
+        JTextField textField22 = editor22.getTextField();
+        textField22.setColumns(2);
 
-        lbToYearTV.setText("Năm");
-        pnToDateTV.add(lbToYearTV);
-        pnToDateTV.add(y);
+        lbFromYearTV1.setText("Năm");
+        pnFromDateTV1.add(lbFromYearTV1);
+        pnFromDateTV1.add(jtfNamTVFrom1);
 
         javax.swing.GroupLayout pn_menuBorrowedDevice1Layout = new javax.swing.GroupLayout(pn_menuBorrowedDevice1);
         pn_menuBorrowedDevice1.setLayout(pn_menuBorrowedDevice1Layout);
@@ -1207,8 +1220,8 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(pn_menuBorrowedDevice1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(pnFromDateTV, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
-                .addComponent(pnToDateTV, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(pnFromDateTV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_menuBorrowedDevice1Layout.setVerticalGroup(
@@ -1224,13 +1237,13 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pn_menuBorrowedDevice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnFromDateTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnToDateTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnFromDateTV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
         cbb_kieuTK.setBackground(Color.white);
         pnFromDateTV.setVisible(false);
-        pnToDateTV.setVisible(false);
+        pnFromDateTV1.setVisible(false);
 
         javax.swing.GroupLayout pnTimeTVLayout = new javax.swing.GroupLayout(pnTimeTV);
         pnTimeTV.setLayout(pnTimeTVLayout);
@@ -1767,12 +1780,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void tabThongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabThongkeMouseClicked
         // TODO add your handling code here:
-        jRadioKhoaTV.setSelected(true);
-        pnChartmember.removeAll();
-        pnChartmember.revalidate();
-        pnChartmember.repaint();
-        pnChartmember.setLayout(new BorderLayout());
-        pnChartmember.add(new MemberChart("Khoa","",""),BorderLayout.CENTER);
+        
     }//GEN-LAST:event_tabThongkeMouseClicked
 
     private void jRadioTimeTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioTimeTBActionPerformed
@@ -2010,8 +2018,33 @@ public class MainForm extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 ex.printStackTrace();
             }
-            lbTongVaoNumTV.setText(String.valueOf(thanhvienBLL.getSLTongVaoTheoNgayNum(new ArrayList<>(), month)));
-        } else if (key.equals("Thống kê trong 1 tháng")) {
+            lbTongVaoNumTV.setText(String.valueOf(thanhvienBLL.getSLTongVaoTheoNgayNum(new ArrayList<>(), dateString)));
+        } else if (key.equals("Thống kê trong khoảng")) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            int day = (int) spnNgayTVFrom.getValue();
+            String month = String.valueOf(spnThangTVFrom.getValue()) ;
+            int year = Integer.parseInt(jtfNamTVFrom.getText());
+            String formattedDay = String.format("%02d", day);
+            String dateString = year + "-" + month + "-" + formattedDay;
+            
+            int day1 = (int) spnNgayTVFrom1.getValue();
+            String month1 = String.valueOf(spnThangTVFrom1.getValue()) ;
+            int year1 = Integer.parseInt(jtfNamTVFrom1.getText());
+            String formattedDay1 = String.format("%02d", day1);
+            String dateString1 = year1 + "-" + month1 + "-" + formattedDay1;
+            try {
+                Date date = sdf.parse(dateString);
+                Date date1 = sdf.parse(dateString1);
+                pnChartmember.removeAll();
+                pnChartmember.revalidate();
+                pnChartmember.repaint();
+                pnChartmember.setLayout(new BorderLayout());
+                pnChartmember.add(new MemberChart("Khoảng",sdf.format(date),sdf.format(date1)),BorderLayout.CENTER);
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+            }
+            lbTongVaoNumTV.setText(String.valueOf(thanhvienBLL.getSLTongVaoTheoKhoangNum(new ArrayList<>(), dateString, dateString1)));
+        }  else if (key.equals("Thống kê trong 1 tháng")) {
             String month = String.valueOf(spnThangTVFrom.getValue()) ;
             pnChartmember.removeAll();
             pnChartmember.revalidate();
@@ -2063,6 +2096,11 @@ public class MainForm extends javax.swing.JFrame {
                 pnFromDateTV.setVisible(true);
                 spnNgayTVFrom.setEnabled(false);
                 spnThangTVFrom.setEnabled(false);
+            } else if (selected.equals("Thống kê trong khoảng")) {
+                pnFromDateTV.setVisible(true);
+                spnNgayTVFrom.setEnabled(true);
+                spnThangTVFrom.setEnabled(true);
+                pnFromDateTV1.setVisible(true);
             }
         }
     }
@@ -2263,7 +2301,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbMonth1;
     private javax.swing.JComboBox<String> cbb_kieuTK;
     private javax.swing.JComboBox<String> cbb_kieuTKTV;
-    private javax.swing.JSpinner d;
     private javax.swing.JButton jBtn_enterClassZone;
     private javax.swing.JButton jBtn_xoaThanhVien;
     private javax.swing.JButton jBtn_xoaThanhVien1;
@@ -2323,6 +2360,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jsp_mainXuLy;
     private javax.swing.JScrollPane jsp_mainXuLy2;
     private javax.swing.JTextField jtfNamTVFrom;
+    private javax.swing.JTextField jtfNamTVFrom1;
     private javax.swing.JTextField jtfYear;
     private javax.swing.JTextField jtfYear1;
     private javax.swing.JTextField jtf_maThanhVien;
@@ -2330,14 +2368,13 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_searchInQLTV;
     private javax.swing.JTextField jtf_xuly;
     private javax.swing.JLabel lbFromMonthTV;
+    private javax.swing.JLabel lbFromMonthTV1;
     private javax.swing.JLabel lbFromYearTV;
+    private javax.swing.JLabel lbFromYearTV1;
     private javax.swing.JLabel lbFromdateTV;
-    private javax.swing.JLabel lbToDayTV;
-    private javax.swing.JLabel lbToMonthTV;
-    private javax.swing.JLabel lbToYearTV;
+    private javax.swing.JLabel lbFromdateTV1;
     private javax.swing.JLabel lbTongVaoNumTV;
     private javax.swing.JLabel lbTongVaoTV;
-    private javax.swing.JSpinner m;
     private javax.swing.JPanel panel_topXuLy;
     private javax.swing.JPanel panelxuly;
     private javax.swing.JPanel pn2ndOptionTB;
@@ -2345,6 +2382,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel pnChartstatus;
     private javax.swing.JPanel pnDeviceChart;
     private javax.swing.JPanel pnFromDateTV;
+    private javax.swing.JPanel pnFromDateTV1;
     private javax.swing.JPanel pnKhoaNganh;
     private javax.swing.JPanel pnOptionTB;
     private javax.swing.JPanel pnRaTV;
@@ -2352,7 +2390,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel pnThongkeTB;
     private javax.swing.JPanel pnThongkeTV;
     private javax.swing.JPanel pnTimeTV;
-    private javax.swing.JPanel pnToDateTV;
     private javax.swing.JPanel pnVaoTV;
     private javax.swing.JPanel pn_BorrowedDevice;
     private javax.swing.JPanel pn_menuBorrowedDevice;
@@ -2360,7 +2397,9 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel pnoptionmember;
     private javax.swing.JButton reload_xuly;
     private javax.swing.JSpinner spnNgayTVFrom;
+    private javax.swing.JSpinner spnNgayTVFrom1;
     private javax.swing.JSpinner spnThangTVFrom;
+    private javax.swing.JSpinner spnThangTVFrom1;
     private javax.swing.JSpinner spn_day;
     private javax.swing.JSpinner spn_day1;
     private javax.swing.JTabbedPane tabThongke;
@@ -2370,6 +2409,5 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTable tb_BorrowedDevice;
     private javax.swing.JTable tb_Thietbi;
     private javax.swing.JTable tb_xuly;
-    private javax.swing.JSpinner y;
     // End of variables declaration//GEN-END:variables
 }
