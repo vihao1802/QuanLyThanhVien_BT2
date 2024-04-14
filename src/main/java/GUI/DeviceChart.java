@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import BLL.ThietBiBLL;
+import BLL.ThietBiBLL;  
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
