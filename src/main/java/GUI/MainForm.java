@@ -1767,6 +1767,7 @@ public class MainForm extends javax.swing.JFrame {
         pnChartmember.repaint();
         pnChartmember.setLayout(new BorderLayout());
         pnChartmember.add(new MemberChart("Khoa","",""),BorderLayout.CENTER);
+        pn_menuBorrowedDevice1.setVisible(false);
     }//GEN-LAST:event_jRadioKhoaTVActionPerformed
 
     private void jRadioNganhTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioNganhTVActionPerformed
@@ -1776,6 +1777,7 @@ public class MainForm extends javax.swing.JFrame {
         pnChartmember.repaint();
         pnChartmember.setLayout(new BorderLayout());
         pnChartmember.add(new MemberChart("Ngành","",""),BorderLayout.CENTER);
+        pn_menuBorrowedDevice1.setVisible(false);
     }//GEN-LAST:event_jRadioNganhTVActionPerformed
 
     private void tabThongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabThongkeMouseClicked
@@ -2085,17 +2087,21 @@ public class MainForm extends javax.swing.JFrame {
         if (selected != null) {
             if (selected.equals("Tất cả")) {
                 pnFromDateTV.setVisible(false);
+                pnFromDateTV1.setVisible(false);
             } else if (selected.equals("Thống kê trong 1 ngày")) {
                 pnFromDateTV.setVisible(true);
                 spnNgayTVFrom.setEnabled(true);
                 spnThangTVFrom.setEnabled(true);
+                pnFromDateTV1.setVisible(false);
             } else if (selected.equals("Thống kê trong 1 tháng")) {
                 pnFromDateTV.setVisible(true);
                 spnNgayTVFrom.setEnabled(false);
+                pnFromDateTV1.setVisible(false);
             } else if (selected.equals("Thống kê trong 1 năm")) {
                 pnFromDateTV.setVisible(true);
                 spnNgayTVFrom.setEnabled(false);
                 spnThangTVFrom.setEnabled(false);
+                pnFromDateTV1.setVisible(false);
             } else if (selected.equals("Thống kê trong khoảng")) {
                 pnFromDateTV.setVisible(true);
                 spnNgayTVFrom.setEnabled(true);
